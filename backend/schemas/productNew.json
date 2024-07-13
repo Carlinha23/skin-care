@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "categoryId": {
+        "type": "integer"
+      },
+      "brand": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "type": "string",
+        "minLength": 1
+      },
+      "price": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "required": ["name", "categoryId", "brand", "description", "price"],
+    "additionalProperties": false
+  }
+  

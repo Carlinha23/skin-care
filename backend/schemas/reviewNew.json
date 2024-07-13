@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+      "rating": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 5
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "comment": {
+        "type": "string",
+        "minLength": 1
+      },
+      "userId": {
+        "type": "integer"
+      },
+      "productId": {
+        "type": "integer"
+      }
+    },
+    "required": ["rating", "title", "comment", "userId", "productId"],
+    "additionalProperties": false
+  }
+  

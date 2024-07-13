@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+      "categoryId": {
+        "type": "integer"
+      },
+      "brand": {
+        "type": "string",
+        "minLength": 1
+      },
+      "priceMin": {
+        "type": "number",
+        "minimum": 0
+      },
+      "priceMax": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "additionalProperties": false
+  }
+  
