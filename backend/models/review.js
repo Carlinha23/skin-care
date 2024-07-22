@@ -9,9 +9,9 @@ const { sqlForPartialUpdate } = require("../helpers/sql");
 class Review {
   /** Create a review (from data), update db, return new review data.
    *
-   * data should be { userId, productId, categoryId, rating, comment, date }
+   * data should be { userId, categoryId, productName, brand, comment, image, date }
    *
-   * Returns { id, userId, productId, categoryId, rating, comment, date }
+   * Returns { id, userId, categoryId, productName, brand, comment, image, date }
    *
    * Throws BadRequestError if review already in database.
    * */
@@ -19,15 +19,16 @@ class Review {
   static async create(data) {
     const result = await db.query(
       `INSERT INTO reviews
-           (user_id, product_id, category_id, rating, comment, date)
-           VALUES ($1, $2, $3, $4, $5, $6)
-           RETURNING id, user_id AS "userId", product_id AS "productId", category_id AS "categoryId", rating, comment, date`,
+           (username, categoryid, productname, brand, comment, image, date)
+           VALUES ($1, $2, $3, $4, $5, $6, $7)
+           RETURNING reviewid AS id, username AS username, categoryid AS categoryId, productname AS productName, brand, comment, image, date`,
       [
-        data.userId,
-        data.productId,
+        data.username,
         data.categoryId,
-        data.rating,
+        data.productName,
+        data.brand,
         data.comment,
+        data.image,
         data.date,
       ]
     );
@@ -40,48 +41,49 @@ class Review {
    *
    * searchFilters (all optional):
    * - userId
-   * - productId
    * - categoryId
-   * - rating
+   * - productName
+   * - brand
    *
-   * Returns [{ id, userId, productId, categoryId, rating, comment, date }, ...]
+   * Returns [{ id, userId, categoryId, productName, brand, comment, image, date }, ...]
    * */
 
   static async findAll(searchFilters = {}) {
-    let query = `SELECT id,
-                        user_id AS "userId",
-                        product_id AS "productId",
-                        category_id AS "categoryId",
-                        rating,
+    let query = `SELECT reviewid AS id,
+                        username AS userId,
+                        categoryid AS categoryId,
+                        productname AS productName,
+                        brand,
                         comment,
+                        image,
                         date
                  FROM reviews`;
     let whereExpressions = [];
     let queryValues = [];
 
-    const { userId, productId, categoryId, rating } = searchFilters;
+    const { userId, categoryId, productName, brand } = searchFilters;
 
     // For each possible search term, add to whereExpressions and queryValues so
     // we can generate the right SQL
 
     if (userId !== undefined) {
       queryValues.push(userId);
-      whereExpressions.push(`user_id = $${queryValues.length}`);
-    }
-
-    if (productId !== undefined) {
-      queryValues.push(productId);
-      whereExpressions.push(`product_id = $${queryValues.length}`);
+      whereExpressions.push(`username = $${queryValues.length}`);
     }
 
     if (categoryId !== undefined) {
       queryValues.push(categoryId);
-      whereExpressions.push(`category_id = $${queryValues.length}`);
+      whereExpressions.push(`categoryid = $${queryValues.length}`);
     }
 
-    if (rating !== undefined) {
-      queryValues.push(rating);
-      whereExpressions.push(`rating = $${queryValues.length}`);
+    if (productName !== undefined) {
+      queryValues.push(productName);
+      whereExpressions.push(`productname ILIKE $${queryValues.length}`);
+    }
+
+    if (brand !== undefined) {
+      queryValues.push(brand);
+      whereExpressions.push(`brand ILIKE $${queryValues.length}`);
     }
 
     if (whereExpressions.length > 0) {
@@ -97,22 +99,23 @@ class Review {
 
   /** Given a review id, return data about review.
    *
-   * Returns { id, userId, productId, categoryId, rating, comment, date }
+   * Returns { id, userId, categoryId, productName, brand, comment, image, date }
    *
    * Throws NotFoundError if not found.
    **/
 
   static async get(id) {
     const reviewRes = await db.query(
-      `SELECT id,
-                  user_id AS "userId",
-                  product_id AS "productId",
-                  category_id AS "categoryId",
-                  rating,
+      `SELECT reviewid AS id,
+                  username AS userId,
+                  categoryid AS categoryId,
+                  productname AS productName,
+                  brand,
                   comment,
+                  image,
                   date
            FROM reviews
-           WHERE id = $1`,
+           WHERE reviewid = $1`,
       [id]
     );
 
@@ -128,9 +131,9 @@ class Review {
    * This is a "partial update" --- it's fine if data doesn't contain all the
    * fields; this only changes provided ones.
    *
-   * Data can include: {rating, comment, date}
+   * Data can include: {productName, brand, comment, image, date}
    *
-   * Returns {id, userId, productId, categoryId, rating, comment, date}
+   * Returns {id, userId, categoryId, productName, brand, comment, image, date}
    *
    * Throws NotFoundError if not found.
    */
@@ -141,13 +144,14 @@ class Review {
 
     const querySql = `UPDATE reviews 
                       SET ${setCols} 
-                      WHERE id = ${idVarIdx} 
-                      RETURNING id, 
-                                user_id AS "userId", 
-                                product_id AS "productId", 
-                                category_id AS "categoryId", 
-                                rating, 
+                      WHERE reviewid = ${idVarIdx} 
+                      RETURNING reviewid AS id, 
+                                username AS userId, 
+                                categoryid AS categoryId, 
+                                productname AS productName, 
+                                brand, 
                                 comment, 
+                                image, 
                                 date`;
     const result = await db.query(querySql, [...values, id]);
     const review = result.rows[0];
@@ -166,15 +170,15 @@ class Review {
     const result = await db.query(
       `DELETE
            FROM reviews
-           WHERE id = $1
-           RETURNING id`,
+           WHERE reviewid = $1
+           RETURNING reviewid`,
       [id]
     );
     const review = result.rows[0];
 
     if (!review) throw new NotFoundError(`No review: ${id}`);
   }
+
 }
 
 module.exports = Review;
-

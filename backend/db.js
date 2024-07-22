@@ -1,23 +1,16 @@
-"use strict";
-/** Database setup for jobly. */
 const { Client } = require("pg");
-const { getDatabaseUri } = require("./config");
 
-let db;
+const client = new Client({
+  connectionString: process.env.DATABASE_URL || "postgresql://carlinha@localhost/skin-care2",
+});
 
-if (process.env.NODE_ENV === "production") {
-  db = new Client({
-    connectionString: getDatabaseUri(),
-    ssl: {
-      rejectUnauthorized: false
-    }
-  });
-} else {
-  db = new Client({
-    connectionString: getDatabaseUri()
-  });
-}
+client.connect((err) => {
+  if (err) {
+    console.error('Connection error', err.stack);
+  } else {
+    console.log('Connected to the database');
+  }
+});
 
-db.connect();
+module.exports = client;
 
-module.exports = db;

@@ -1,16 +1,14 @@
--- Create users table
-CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL CHECK (position('@' IN email) > 1),
-    username VARCHAR(25) UNIQUE NOT NULL,
-    password TEXT NOT NULL
+CREATE TABLE Users (
+    UserID SERIAL PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Username VARCHAR(255) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL
 );
 
--- Create category table
-CREATE TABLE category (
-    category_id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE NOT NULL
+CREATE TABLE Category (
+    CategoryID SERIAL PRIMARY KEY,
+    Name VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- Insert predefined categories into category table
@@ -30,22 +28,16 @@ INSERT INTO category (name) VALUES
     ('Others'),
     
 
--- Create product table
-CREATE TABLE product (
-    product_id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    category_id INTEGER NOT NULL REFERENCES category(category_id) ON DELETE CASCADE,
-    brand TEXT NOT NULL,
-    image TEXT
+CREATE TABLE Reviews (
+    ReviewID SERIAL PRIMARY KEY,
+    Username INT NOT NULL,
+    CategoryID INT NOT NULL,
+    ProductName VARCHAR(255) NOT NULL,
+    Brand VARCHAR(255) NOT NULL,
+    Comment TEXT,
+    Image VARCHAR(255),
+    Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
 );
 
--- Create reviews table
-CREATE TABLE reviews (
-    review_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    product_id INTEGER NOT NULL REFERENCES product(product_id) ON DELETE CASCADE,
-    category_id INTEGER NOT NULL REFERENCES category(category_id) ON DELETE CASCADE,
-    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
-    comment TEXT,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);

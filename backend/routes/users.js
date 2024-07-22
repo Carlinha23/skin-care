@@ -11,6 +11,8 @@ const User = require("../models/user");
 const { createToken } = require("../helpers/tokens");
 const userNewSchema = require("../schemas/userNew.json");
 const userUpdateSchema = require("../schemas/userUpdate.json");
+//const userRegister = require("../schemas/userRegister.json");
+//const userAuth = require("../schema/userAuth.json");
 
 const router = express.Router();
 
@@ -26,23 +28,9 @@ const router = express.Router();
  *
  * Authorization required: admin
  **/
-
-router.post("/", ensureAdmin, async function (req, res, next) {
-  try {
-    const validator = jsonschema.validate(req.body, userNewSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
-
-    const user = await User.register(req.body);
-    const token = createToken(user);
-    return res.status(201).json({ user, token });
-  } catch (err) {
-    return next(err);
-  }
+router.get('/', (req, res) => {
+  res.send('Hello, World!');
 });
-
 
 /** GET / => { users: [ {username, firstName, lastName, email }, ... ] }
  *
@@ -51,7 +39,7 @@ router.post("/", ensureAdmin, async function (req, res, next) {
  * Authorization required: admin
  **/
 
-router.get("/", ensureAdmin, async function (req, res, next) {
+router.get("/all", ensureAdmin, async function (req, res, next) {
   try {
     const users = await User.findAll();
     return res.json({ users });

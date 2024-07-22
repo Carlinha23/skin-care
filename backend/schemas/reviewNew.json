@@ -1,12 +1,17 @@
 {
     "type": "object",
     "properties": {
-      "rating": {
-        "type": "integer",
-        "minimum": 1,
-        "maximum": 5
+      "username": {
+        "type": "string"
       },
-      "title": {
+      "categoryId": {
+        "type": "integer"
+      },
+      "productName": {
+        "type": "string",
+        "minLength": 1
+      },
+      "brand": {
         "type": "string",
         "minLength": 1
       },
@@ -14,14 +19,16 @@
         "type": "string",
         "minLength": 1
       },
-      "userId": {
-        "type": "integer"
+      "image": {
+        "type": "string",
+        "minLength": 1
       },
-      "productId": {
-        "type": "integer"
+      "date": {
+        "type": "string",
+        "format": "date-time"
       }
     },
-    "required": ["rating", "title", "comment", "userId", "productId"],
+    "required": ["username", "categoryId", "productName", "brand", "comment", "date"],
     "additionalProperties": false
   }
   

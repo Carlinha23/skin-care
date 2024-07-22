@@ -1,7 +1,3 @@
-"use strict";
-
-/** Routes for reviews. */
-
 const jsonschema = require("jsonschema");
 const express = require("express");
 
@@ -10,20 +6,24 @@ const { ensureLoggedIn } = require("../middleware/auth");
 const Review = require("../models/review");
 
 const reviewNewSchema = require("../schemas/reviewNew.json");
-const reviewUpdateSchema = require("../schemas/reviewUpdate.json");
+//const reviewUpdateSchema = require("../schemas/reviewUpdate.json");
 
 const router = new express.Router();
 
 /** POST / { review } =>  { review }
  *
- * review should be { rating, title, comment, userId, productId }
+ * review should be { userId, categoryId, productName, brand, comment, image, date }
  *
- * Returns { id, rating, title, comment, userId, productId }
+ * Returns { id, userId, categoryId, productName, brand, comment, image, date }
  *
  * Authorization required: logged in user
  */
+router.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
 
-router.post("/", ensureLoggedIn, async function (req, res, next) {
+
+router.post("/",ensureLoggedIn, async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, reviewNewSchema);
     if (!validator.valid) {
@@ -39,14 +39,14 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 });
 
 /** GET /  =>
- *   { reviews: [ { id, rating, title, comment, userId, productId }, ...] }
+ *   { reviews: [ { id, userId, categoryId, productName, brand, comment, image, date }, ...] }
  *
  * Authorization required: none
  */
 
-router.get("/", async function (req, res, next) {
+router.get("/all", async function (req, res, next) {
   try {
-    const reviews = await Review.findAll();
+    const reviews = await Review.findAll(req.query);
     return res.json({ reviews });
   } catch (err) {
     return next(err);
@@ -55,7 +55,7 @@ router.get("/", async function (req, res, next) {
 
 /** GET /[id]  =>  { review }
  *
- *  Review is { id, rating, title, comment, userId, productId }
+ *  Review is { id, userId, categoryId, productName, brand, comment, image, date }
  *
  * Authorization required: none
  */
@@ -69,50 +69,6 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
-/** PATCH /[id] { fld1, fld2, ... } => { review }
- *
- * Patches review data.
- *
- * fields can be: { rating, title, comment }
- *
- * Returns { id, rating, title, comment, userId, productId }
- *
- * Authorization required: logged in user
- */
 
-router.patch("/:id", ensureLoggedIn, async function (req, res, next) {
-  try {
-    const validator = jsonschema.validate(req.body, reviewUpdateSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
-
-    const review = await Review.update(req.params.id, req.body);
-    return res.json({ review });
-  } catch (err) {
-    return next(err);
-  }
-});
-
-/** DELETE /[id]  =>  { deleted: id }
- *
- * Authorization: admin or the user who created the review
- */
-
-router.delete("/:id", ensureLoggedIn, async function (req, res, next) {
-  try {
-    const review = await Review.get(req.params.id);
-
-    if (req.user.id !== review.userId && !req.user.isAdmin) {
-      throw new NotFoundError();
-    }
-
-    await Review.remove(req.params.id);
-    return res.json({ deleted: req.params.id });
-  } catch (err) {
-    return next(err);
-  }
-});
 
 module.exports = router;
