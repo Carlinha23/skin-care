@@ -13,6 +13,7 @@ const userNewSchema = require("../schemas/userNew.json");
 const userUpdateSchema = require("../schemas/userUpdate.json");
 //const userRegister = require("../schemas/userRegister.json");
 //const userAuth = require("../schema/userAuth.json");
+const { authenticateJWT } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -28,6 +29,8 @@ const router = express.Router();
  *
  * Authorization required: admin
  **/
+router.use(authenticateJWT);
+
 router.get('/', (req, res) => {
   res.send('Hello, World!');
 });

@@ -7,6 +7,7 @@ const { SECRET_KEY } = require("../config");
 const { UnauthorizedError } = require("../expressError");
 
 
+
 /** Middleware: Authenticate user.
  *
  * If a token was provided, verify it, and, if valid, store the token payload
@@ -21,6 +22,8 @@ function authenticateJWT(req, res, next) {
     if (authHeader) {
       const token = authHeader.replace(/^[Bb]earer /, "").trim();
       res.locals.user = jwt.verify(token, SECRET_KEY);
+      console.log("Authenticated User:", res.locals.user); 
+      
     }
     return next();
   } catch (err) {
@@ -50,6 +53,7 @@ function ensureLoggedIn(req, res, next) {
 
 function ensureAdmin(req, res, next) {
   try {
+    console.log("User in ensureAdmin:", res.locals.user);
     if (!res.locals.user || !res.locals.user.isAdmin) {
       throw new UnauthorizedError();
     }

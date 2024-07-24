@@ -1,0 +1,15 @@
+.category-bar {
+    margin-bottom: 20px;
+  }
+  
+  .review-form select {
+    margin-bottom: 10px;
+  }
+  
+  .reviews-list .review-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  
