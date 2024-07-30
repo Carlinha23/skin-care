@@ -19,19 +19,28 @@ function Review() {
 
   useEffect(() => {
     async function fetchReviews() {
-      const res = await axios.get('/api/reviews/all');
-      setReviews(res.data.reviews);
+      try {
+        const res = await axios.get('/api/reviews');
+        setReviews(res.data.reviews);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
     }
     fetchReviews();
   }, []);
-
+  
   useEffect(() => {
     async function fetchCategories() {
-      const res = await axios.get('/api/categories');
-      setCategories(res.data.categories);
+      try {
+        const res = await axios.get('/api/categories');
+        setCategories(res.data.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
     }
     fetchCategories();
   }, []);
+  
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -45,7 +54,9 @@ function Review() {
         image: '',
         date: ''
       });
-      history.push('/reviews');
+      history.push('/reviews'); 
+      const res = await axios.get('/api/reviews');
+      setReviews(res.data.reviews);
     } catch (err) {
       console.error("Error during review submission:", err);
     }
@@ -66,14 +77,6 @@ function Review() {
   return (
     <div className="review-container">
       <h1>Reviews</h1>
-      <div className="category-bar">
-        <select value={selectedCategory} onChange={handleCategoryChange}>
-          <option value="">All Categories</option>
-          {categories.map(category => (
-            <option key={category.id} value={category.id}>{category.name}</option>
-          ))}
-        </select>
-      </div>
       <form onSubmit={handleSubmit} className="review-form">
         <label>Category</label>
         <select

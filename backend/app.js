@@ -1,19 +1,13 @@
 "use strict";
 
-/** Express app for jobly. */
-
 const express = require("express");
 const cors = require("cors");
-
 const { NotFoundError } = require("./expressError");
-
 const { authenticateJWT } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
-//const productRoutes = require("./routes/product");
 const usersRoutes = require("./routes/users");
-const reviewRoutes = require("./routes/review");
-const categoryRoutes = require("./routes/category");
-
+const reviewRouter = require("./routes/review");
+const categoryRouter = require("./routes/category");
 const morgan = require("morgan");
 
 const app = express();
@@ -24,25 +18,22 @@ app.use(morgan("tiny"));
 app.use(authenticateJWT);
 
 app.use("/auth", authRoutes);
-//app.use("/product", productRoutes);
 app.use("/users", usersRoutes);
-app.use("/review", reviewRoutes);
-app.use("/category", categoryRoutes);
+app.use("/api/reviews", reviewRouter);  // Use /api prefix for the routers
+app.use("/api/categories", categoryRouter);  // Use /api prefix for the routers
 
-/** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
   return next(new NotFoundError());
 });
 
-/** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
   if (process.env.NODE_ENV !== "test") console.error(err.stack);
   const status = err.status || 500;
   const message = err.message;
-
   return res.status(status).json({
     error: { message, status },
   });
 });
 
 module.exports = app;
+
