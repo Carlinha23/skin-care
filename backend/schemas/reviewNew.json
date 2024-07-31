@@ -1,34 +1,12 @@
 {
-    "type": "object",
-    "properties": {
-      "username": {
-        "type": "string"
-      },
-      "categoryId": {
-        "type": "integer"
-      },
-      "productName": {
-        "type": "string",
-        "minLength": 1
-      },
-      "brand": {
-        "type": "string",
-        "minLength": 1
-      },
-      "comment": {
-        "type": "string",
-        "minLength": 1
-      },
-      "image": {
-        "type": "string",
-        "minLength": 1
-      },
-      "date": {
-        "type": "string",
-        "format": "date-time"
-      }
-    },
-    "required": ["username", "categoryId", "productName", "brand", "comment", "date"],
-    "additionalProperties": false
-  }
-  
+  "type": "object",
+  "properties": {
+    "categoryName": { "type": "string", "minLength": 1 },
+    "productName": { "type": "string", "minLength": 1 },
+    "brand": { "type": "string", "minLength": 1 },
+    "comment": { "type": "string", "minLength": 1 },
+    "image": { "type": "string", "minLength": 0 } 
+  },
+  "required": ["categoryName", "productName", "brand", "comment"],
+  "additionalProperties": false
+}

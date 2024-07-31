@@ -6,14 +6,13 @@ import './Review.css';
 function Review() {
   const [reviews, setReviews] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory] = useState('');
   const [newReview, setNewReview] = useState({
-    categoryId: '',
+    categoryName: '',
     productName: '',
     brand: '',
     comment: '',
-    image: '',
-    date: ''
+    image: ''
   });
   const history = useHistory();
 
@@ -41,27 +40,38 @@ function Review() {
     fetchCategories();
   }, []);
   
-
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await axios.post('/api/reviews', newReview);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No token found');
+      }
+
+      const reviewData = { ...newReview, image: newReview.image || '' };
+
+      console.log("Sending data:", newReview);
+      console.log("With headers:", { Authorization: `Bearer ${token}` });
+  
+      await axios.post('/api/reviews', reviewData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
       setNewReview({
-        categoryId: '',
+        categoryName: '',
         productName: '',
         brand: '',
         comment: '',
-        image: '',
-        date: ''
+        image: ''
       });
-      history.push('/reviews'); 
+      history.push('/reviews');
       const res = await axios.get('/api/reviews');
       setReviews(res.data.reviews);
     } catch (err) {
-      console.error("Error during review submission:", err);
+      console.error("Error during review submission:", err.response ? err.response.data : err.message);
     }
   }
-
+  
   function handleChange(evt) {
     const { name, value } = evt.target;
     setNewReview(prevReview => ({
@@ -70,23 +80,19 @@ function Review() {
     }));
   }
 
-  function handleCategoryChange(evt) {
-    setSelectedCategory(evt.target.value);
-  }
-
   return (
     <div className="review-container">
       <h1>Reviews</h1>
       <form onSubmit={handleSubmit} className="review-form">
         <label>Category</label>
         <select
-          name="categoryId"
-          value={newReview.categoryId}
+          name="categoryName"
+          value={newReview.categoryName}
           onChange={handleChange}
         >
           <option value="">Select a Category</option>
           {categories.map(category => (
-            <option key={category.id} value={category.id}>{category.name}</option>
+            <option key={category.id} value={category.name}>{category.name}</option>
           ))}
         </select>
         <label>Product Name</label>
@@ -115,13 +121,6 @@ function Review() {
           type="text"
           name="image"
           value={newReview.image}
-          onChange={handleChange}
-        />
-        <label>Date</label>
-        <input
-          type="text"
-          name="date"
-          value={newReview.date}
           onChange={handleChange}
         />
         <button type="submit">Add Review</button>

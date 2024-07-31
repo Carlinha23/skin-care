@@ -9,8 +9,10 @@ import Profile from './Profile';
 import NavBar from './Navigation';
 import Review from './Review';
 
+
 function App() {
     return (
+      
       <UserProvider>
         <BrowserRouter> {/* Wrap entire app with BrowserRouter */}
           <NavBar />

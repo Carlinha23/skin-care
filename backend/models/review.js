@@ -6,17 +6,20 @@ const { sqlForPartialUpdate } = require("../helpers/sql");
 
 /** Related functions for reviews. */
 
-class Review {
-  /** Create a review (from data), update db, return new review data.
-   *
-   * data should be { userId, categoryId, productName, brand, comment, image, date }
-   *
-   * Returns { id, userId, categoryId, productName, brand, comment, image, date }
-   *
-   * Throws BadRequestError if review already in database.
-   * */
 
+class Review {
   static async create(data) {
+    const date = new Date().toISOString();
+
+    // Find the category ID by category name
+    const categoryRes = await db.query(
+      `SELECT categoryid AS id FROM category WHERE name = $1`,
+      [data.categoryName]
+    );
+    const category = categoryRes.rows[0];
+
+    if (!category) throw new BadRequestError(`No category: ${data.categoryName}`);
+
     const result = await db.query(
       `INSERT INTO reviews
            (username, categoryid, productname, brand, comment, image, date)
@@ -24,18 +27,20 @@ class Review {
            RETURNING reviewid AS id, username AS username, categoryid AS categoryId, productname AS productName, brand, comment, image, date`,
       [
         data.username,
-        data.categoryId,
+        category.id,
         data.productName,
         data.brand,
         data.comment,
         data.image,
-        data.date,
+        date,
       ]
     );
     const review = result.rows[0];
 
     return review;
   }
+
+  
 
   /** Find all reviews (optional filter on searchFilters).
    *
