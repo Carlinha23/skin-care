@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'reactstrap';
 import { UserContext } from './UserContext';
-// import './Navigation.css';
+import './Navigation.css';
+import logo from './images/logo.png';
 
 function NavBar() {
   const { currentUser, logout } = useContext(UserContext);
@@ -10,39 +11,38 @@ function NavBar() {
   return (
     <Navbar expand="md" className="navbar-custom">
       <NavLink exact to="/" className="navbar-brand-custom">
-        Skin-Care Review!
+      <img src={logo} alt="SkinCare Review Logo" className="navbar-logo" />
       </NavLink>
-      <div className="nav-items-right">
-        <Nav className="ml-auto" navbar>
-          {currentUser ? (
-            <>
-              <NavItem>
-                <NavLink to="/reviews" className="nav-link-custom">Reviews</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/profile" className="nav-link-custom">{currentUser.username}</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/" onClick={logout} className="nav-link-custom">Logout</NavLink>
-              </NavItem>
-            </>
-          ) : (
-            <>
-              <NavItem>
-                <NavLink to="/reviews" className="nav-link-custom">Reviews</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/login" className="nav-link-custom">Login</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/signup" className="nav-link-custom">Signup</NavLink>
-              </NavItem>
-            </>
-          )}
-        </Nav>
+      <div className="nav-items-left">
+        {currentUser ? (
+          <>
+            <NavItem className="nav-item">
+              <NavLink to="/reviews" className="nav-link-custom">Reviews</NavLink>
+            </NavItem>
+            <NavItem className="nav-item">
+              <NavLink to="/profile" className="nav-link-custom">{currentUser.username}</NavLink>
+            </NavItem>
+            <NavItem className="nav-item">
+              <NavLink to="/" onClick={logout} className="nav-link-custom">Logout</NavLink>
+            </NavItem>
+          </>
+        ) : (
+          <>
+            <NavItem className="nav-item">
+              <NavLink to="/reviews" className="nav-link-custom">Reviews</NavLink>
+            </NavItem>
+            <NavItem className="nav-item">
+              <NavLink to="/login" className="nav-link-custom">Login</NavLink>
+            </NavItem>
+            <NavItem className="nav-item">
+              <NavLink to="/signup" className="nav-link-custom">Signup</NavLink>
+            </NavItem>
+          </>
+        )}
       </div>
     </Navbar>
   );
 }
+
 
 export default NavBar;

@@ -14,12 +14,14 @@ function Review() {
     comment: '',
     image: ''
   });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
     async function fetchReviews() {
       try {
         const res = await axios.get('/api/reviews');
+        console.log("Fetched reviews:", res.data.reviews); 
         setReviews(res.data.reviews);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -27,7 +29,7 @@ function Review() {
     }
     fetchReviews();
   }, []);
-  
+
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -39,9 +41,20 @@ function Review() {
     }
     fetchCategories();
   }, []);
-  
+
+  useEffect(() => {
+    // Check if user is authenticated by checking the token
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
+
   async function handleSubmit(evt) {
     evt.preventDefault();
+    if (!isAuthenticated) {
+      alert('Please log in or sign up to add a review.');
+      return;
+    }
+    
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -52,11 +65,11 @@ function Review() {
 
       console.log("Sending data:", newReview);
       console.log("With headers:", { Authorization: `Bearer ${token}` });
-  
+
       await axios.post('/api/reviews', reviewData, {
         headers: { Authorization: `Bearer ${token}` }
       });
-  
+
       setNewReview({
         categoryName: '',
         productName: '',
@@ -71,7 +84,7 @@ function Review() {
       console.error("Error during review submission:", err.response ? err.response.data : err.message);
     }
   }
-  
+
   function handleChange(evt) {
     const { name, value } = evt.target;
     setNewReview(prevReview => ({
@@ -83,57 +96,62 @@ function Review() {
   return (
     <div className="review-container">
       <h1>Reviews</h1>
-      <form onSubmit={handleSubmit} className="review-form">
-        <label>Category</label>
-        <select
-          name="categoryName"
-          value={newReview.categoryName}
-          onChange={handleChange}
-        >
-          <option value="">Select a Category</option>
-          {categories.map(category => (
-            <option key={category.id} value={category.name}>{category.name}</option>
-          ))}
-        </select>
-        <label>Product Name</label>
-        <input
-          type="text"
-          name="productName"
-          value={newReview.productName}
-          onChange={handleChange}
-        />
-        <label>Brand</label>
-        <input
-          type="text"
-          name="brand"
-          value={newReview.brand}
-          onChange={handleChange}
-        />
-        <label>Comment</label>
-        <input
-          type="text"
-          name="comment"
-          value={newReview.comment}
-          onChange={handleChange}
-        />
-        <label>Image URL</label>
-        <input
-          type="text"
-          name="image"
-          value={newReview.image}
-          onChange={handleChange}
-        />
-        <button type="submit">Add Review</button>
-      </form>
+      {!isAuthenticated && (
+        <p className="login-prompt">Please log in or sign up to add a review.</p>
+      )}
+      {isAuthenticated && (
+        <form onSubmit={handleSubmit} className="review-form">
+          <label>Category</label>
+          <select
+            name="categoryName"
+            value={newReview.categoryName}
+            onChange={handleChange}
+          >
+            <option value="">Select a Category</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.name}>{category.name}</option>
+            ))}
+          </select>
+          <label>Product Name</label>
+          <input
+            type="text"
+            name="productName"
+            value={newReview.productName}
+            onChange={handleChange}
+          />
+          <label>Brand</label>
+          <input
+            type="text"
+            name="brand"
+            value={newReview.brand}
+            onChange={handleChange}
+          />
+          <label>Comment</label>
+          <input
+            type="text"
+            name="comment"
+            value={newReview.comment}
+            onChange={handleChange}
+          />
+          <label>Image URL</label>
+          <input
+            type="text"
+            name="image"
+            value={newReview.image}
+            onChange={handleChange}
+          />
+          <button type="submit">Add Review</button>
+        </form>
+      )}
       <div className="reviews-list">
         {reviews
           .filter(review => !selectedCategory || review.categoryId === parseInt(selectedCategory))
           .map(review => (
             <div key={review.id} className="review-item">
-              <h3>{review.productName}</h3>
+              <h3>{review.productname || 'No product name'}</h3>
               <p>Brand: {review.brand}</p>
               <p>Comment: {review.comment}</p>
-              <img src={review.image} alt={review.productName} />
+              <img src={review.image} alt={review.productname || 'Image'} />
               <p>Date: {review.date}</p>
             </div>
           ))}

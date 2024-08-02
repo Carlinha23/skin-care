@@ -1,0 +1,48 @@
+/* Navigation.css */
+.navbar-custom {
+    background-color: #efddbe; /* Soft light background */
+    border-bottom: 2px solid #e0aaff; /* Elegant border color */
+    padding: 0.5rem 1rem; /* Padding around the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a floating effect */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand-custom {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    height: 40px; /* Adjust the height as needed */
+    width: auto; /* Maintain aspect ratio */
+    display: block;
+  }
+  
+  .nav-items-left {
+    display: flex;
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .nav-item {
+    margin-right: 1rem; /* Space between nav items */
+  }
+  
+  .nav-link-custom {
+    font-family: 'Lora', serif; /* Stylish and readable font for links */
+    color: #245580; /* Subtle grey color */
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px; /* Rounded corners for a softer look */
+  }
+  
+  .nav-link-custom:hover {
+    color: #e0aaff; /* Lavender color on hover */
+    background-color: #f1f1f1; /* Light background on hover */
+  }
+  
