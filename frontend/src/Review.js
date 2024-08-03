@@ -95,12 +95,15 @@ function Review() {
 
   return (
     <div className="review-container">
-      <h1>Reviews</h1>
-      {!isAuthenticated && (
-        <p className="login-prompt">Please log in or sign up to add a review.</p>
-      )}
-      {isAuthenticated && (
-        <form onSubmit={handleSubmit} className="review-form">
+  <h1>Share Your Skincare Experience!</h1>
+  {!isAuthenticated && (
+    <p className="login-prompt">Please log in or sign up to add a review and help others discover the best skincare products!</p>
+  )}
+  {isAuthenticated && (
+    <div className="review-form-container">
+      <p>We’d love to hear about your favorite products and experiences! Your review will help others in their skincare journey. Share your thoughts below:</p>
+      <form onSubmit={handleSubmit} className="review-form">
+        <div>
           <label>Category</label>
           <select
             name="categoryName"
@@ -112,6 +115,8 @@ function Review() {
               <option key={category.id} value={category.name}>{category.name}</option>
             ))}
           </select>
+        </div>
+        <div>
           <label>Product Name</label>
           <input
             type="text"
@@ -119,6 +124,8 @@ function Review() {
             value={newReview.productName}
             onChange={handleChange}
           />
+        </div>
+        <div>
           <label>Brand</label>
           <input
             type="text"
@@ -126,13 +133,16 @@ function Review() {
             value={newReview.brand}
             onChange={handleChange}
           />
+        </div>
+        <div>
           <label>Comment</label>
-          <input
-            type="text"
+          <textarea
             name="comment"
             value={newReview.comment}
             onChange={handleChange}
           />
+        </div>
+        <div className="image-field">
           <label>Image URL</label>
           <input
             type="text"
@@ -140,23 +150,25 @@ function Review() {
             value={newReview.image}
             onChange={handleChange}
           />
-          <button type="submit">Add Review</button>
-        </form>
-      )}
-      <div className="reviews-list">
-        {reviews
-          .filter(review => !selectedCategory || review.categoryId === parseInt(selectedCategory))
-          .map(review => (
-            <div key={review.id} className="review-item">
-              <h3>{review.productname || 'No product name'}</h3>
-              <p>Brand: {review.brand}</p>
-              <p>Comment: {review.comment}</p>
-              <img src={review.image} alt={review.productname || 'Image'} />
-              <p>Date: {review.date}</p>
-            </div>
-          ))}
-      </div>
+        </div>
+        <button type="submit">Add Review</button>
+      </form>
     </div>
+  )}
+  <div className="reviews-list">
+    {reviews
+      .filter(review => !selectedCategory || review.categoryId === parseInt(selectedCategory))
+      .map(review => (
+        <div key={review.id} className="review-item">
+          <h3>{review.productname || 'No product name'}</h3>
+          <p>Brand: {review.brand}</p>
+          <p>Comment: {review.comment}</p>
+          <img src={review.image} alt={review.productname || 'Image'} />
+          <p>Date: {review.date}</p>
+        </div>
+      ))}
+  </div>
+</div>
   );
 }
 

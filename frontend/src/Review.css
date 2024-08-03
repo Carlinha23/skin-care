@@ -1,15 +1,121 @@
-.category-bar {
-    margin-bottom: 20px;
-  }
-  
-  .review-form select {
-    margin-bottom: 10px;
-  }
-  
-  .reviews-list .review-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  
+/* Styling for the review form container */
+.review-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 20px; /* Space between grid items */
+  margin-bottom: 30px; /* Space below the form */
+  max-width: 600px; /* Limit the width of the form */
+  margin: 0 auto; /* Center the form */
+}
+
+/* Styling for form labels */
+.review-form label {
+  font-weight: bold;
+  color: #34495e; /* Dark color for labels */
+  margin-bottom: 5px;
+}
+
+/* Styling for form inputs and selects */
+.review-form input,
+.review-form select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  width: 100%; /* Full width of the parent container */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+/* Styling for larger comment box */
+.review-form textarea {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Same font size */
+  width: 100%; /* Full width of the parent container */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  height: 100px; /* Larger height for comment box */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Styling for form buttons */
+.review-form button {
+  grid-column: span 2; /* Span across both columns */
+  padding: 10px;
+  background-color: #3498db; /* Blue background for button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-form button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Optional: Styling for the form container */
+.review-form-container {
+  background-color: #f9f9f9; /* Light background color */
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the form container */
+}
+
+/* Styling for image input field */
+.review-form .image-field {
+  grid-column: 2 / 3; /* Place in the second column */
+}
+
+.review-form .image-field input {
+  padding: 4px;
+  font-size: 0.8rem; /* Very small font size */
+}
+
+/* Reviews list styling */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between review items */
+}
+
+.review-item {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.review-item h3 {
+  color: #2c3e50;
+  font-family: 'Lora', serif;
+  margin-top: 0;
+}
+
+.review-item p {
+  margin: 5px 0;
+  color: #7f8c8d; /* Subtle grey color for text */
+}
+
+.review-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px; /* Rounded corners for images */
+}
+
+
+.review-container h1 {
+  color: #2c3e50; /* Dark color for headings */
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.review-form-container p {
+  color: #2c3e50; /* Dark color for headings */
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}

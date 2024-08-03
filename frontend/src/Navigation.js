@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'reactstrap';
+import { Navbar, NavItem } from 'reactstrap';
 import { UserContext } from './UserContext';
 import './Navigation.css';
 import logo from './images/logo.png';

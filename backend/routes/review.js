@@ -32,14 +32,20 @@ reviewRouter.post("/", ensureLoggedIn, async function (req, res, next) {
 
 reviewRouter.get("/", async function (req, res, next) {
   try {
-    const reviews = await Review.findAll(req.query);
+    const searchFilters = {};
+
+    if (req.query.category) {
+      searchFilters.categoryId = req.query.category;
+    }
+
+    const reviews = await Review.findAll(searchFilters);
     return res.json({ reviews });
   } catch (err) {
-    // Log the error
     console.error("Error in GET /reviews:", err);
     return next(err);
   }
 });
+
 
 reviewRouter.get("/:id", async function (req, res, next) {
   try {

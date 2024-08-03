@@ -1,0 +1,73 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between items, pushing the search form to the bottom */
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4; /* Light background color for the page */
+    min-height: 100vh; /* Ensure the container takes up at least the full viewport height */
+  }
+  
+  .welcome-message {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .info-text {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto; 
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #245580; /* Button color */
+    color: white;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: #1d4b72; /* Darker button color on hover */
+  }
+  
+  .category-select {
+    padding: 10px; /* Add padding for a more comfortable click area */
+    font-size: 1rem; /* Set a readable font size */
+    border: 1px solid #ddd; /* Light border for the dropdown */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    color: #333; /* Dark text color */
+    width: 250px; /* Set a width for consistency */
+    max-width: 100%; /* Ensure it doesn't overflow on smaller screens */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    appearance: none; /* Remove default styling in favor of custom styles */
+  }
+  
+  .category-select option {
+    padding: 10px; /* Add padding inside option elements */
+  }
+  
+  .category-select:focus {
+    border-color: #245580; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  .home-container h1 { 
+    color: #2c3e50; /* Dark color for headings */
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
