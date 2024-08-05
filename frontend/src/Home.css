@@ -1,73 +1,180 @@
 .home-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Space between items, pushing the search form to the bottom */
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f4; /* Light background color for the page */
-    min-height: 100vh; /* Ensure the container takes up at least the full viewport height */
-  }
-  
-  .welcome-message {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .info-text {
-    font-size: 1.2rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-  }
-  
-  .search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: auto; 
-  }
-  
-  .search-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #245580; /* Button color */
-    color: white;
-    cursor: pointer;
-  }
-  
-  .search-button:hover {
-    background-color: #1d4b72; /* Darker button color on hover */
-  }
-  
-  .category-select {
-    padding: 10px; /* Add padding for a more comfortable click area */
-    font-size: 1rem; /* Set a readable font size */
-    border: 1px solid #ddd; /* Light border for the dropdown */
-    border-radius: 4px; /* Rounded corners */
-    background-color: #fff; /* White background */
-    color: #333; /* Dark text color */
-    width: 250px; /* Set a width for consistency */
-    max-width: 100%; /* Ensure it doesn't overflow on smaller screens */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
-    appearance: none; /* Remove default styling in favor of custom styles */
-  }
-  
-  .category-select option {
-    padding: 10px; /* Add padding inside option elements */
-  }
-  
-  .category-select:focus {
-    border-color: #245580; /* Change border color on focus */
-    outline: none; /* Remove default outline */
-  }
-  
-  .home-container h1 { 
-    color: #2c3e50; /* Dark color for headings */
-    font-family: 'Lora', serif;
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+  position: relative;
+  background-image: url('./images/image4.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
+  z-index: -1; /* Ensure the overlay is behind the content */
+}
+.welcome-info {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* Space between the h1 and p elements */
+  margin-bottom: 20px;
+}
+.welcome-message {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.navbar-logo {
+  max-width: 300px; /* Increase this value to make the logo larger */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+.info-text {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin: 0;
+  max-width: 600px;
+  font-family: cursive;
+  font-weight: bold;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4; /* Match the background color of the container */
+  padding: 10px; /* Add some padding to ensure it doesn't stick too closely */
+  z-index: 10; /* Ensure it stays on top */
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  width: 250px;
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-button, .add-review-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button {
+  background-color: #245580;
+  color: white;
+}
+
+.search-button:hover {
+  background-color: #1d4b72;
+}
+
+.add-review-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.add-review-button:hover {
+  background-color: #218838;
+}
+
+.category-select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  width: 250px;
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  appearance: none;
+}
+
+.category-select option {
+  padding: 10px;
+}
+
+.category-select:focus {
+  border-color: #245580;
+  outline: none;
+}
+
+.home-container h1 {
+  color: #2c3e50;
+  font-family: 'Lora', serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.no-reviews-message {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the items horizontally */
+  gap: 20px; /* Add some space between items */
+  padding: 20px; /* Add padding around the list */
+}
+
+.review-item {
+  background-color: #fff; /* White background for each review item */
+  border: 1px solid #ddd; /* Light border around the item */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  padding: 20px; /* Padding inside the item */
+  width: 80%; /* Adjust width to be less than 100% */
+  max-width: 800px; /* Set a max-width for larger screens */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 0 auto; /* Center align the review items horizontally */
+}
+
+.review-item img {
+  max-width: 100%; /* Ensure images don’t overflow */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.review-details {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack labels and values vertically */
+  gap: 10px; /* Add space between each detail */
+}
+
+.review-label {
+  color: #2c3e50; /* Color for labels */
+  font-weight: bold; /* Bold for labels */
+}
+
+.review-value {
+  color: #2c3e50; /* Color for values */
+  font-weight: bold; /* Bold for values */
+}
+
+.review-date {
+  color: #2c3e50; /* Color for date */
+}

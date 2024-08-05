@@ -1,0 +1,65 @@
+/* Signup.css */
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f4f4f4; /* Light background color */
+    padding: 20px;
+  }
+  
+  .signup-form {
+    background-color: #fff; /* White background for the form */
+    border: 1px solid #ddd; /* Light border around the form */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Limit form width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .signup-form label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .signup-form input {
+    width: 100%; /* Full width input fields */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd; /* Light border for input fields */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 15px; /* Space between fields */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+  
+  .signup-form button {
+    width: 100%; /* Full width button */
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #245580; /* Button color */
+    color: white;
+    cursor: pointer;
+  }
+  
+  .signup-form button:hover {
+    background-color: #1d4b72; /* Darker button color on hover */
+  }
+  
+  .error {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #e74c3c; /* Red color for error messages */
+  }
+  
+  .success {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #28a745; /* Green color for success message */
+  }

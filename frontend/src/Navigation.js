@@ -20,7 +20,7 @@ function NavBar() {
               <NavLink to="/reviews" className="nav-link-custom">Reviews</NavLink>
             </NavItem>
             <NavItem className="nav-item">
-              <NavLink to="/profile" className="nav-link-custom">{currentUser.username}</NavLink>
+              <NavLink to="/profile" className="nav-link-custom">Hi, {currentUser.username}</NavLink>
             </NavItem>
             <NavItem className="nav-item">
               <NavLink to="/" onClick={logout} className="nav-link-custom">Logout</NavLink>

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './UserContext';
-//import './Login.css';
+import './Login.css';
 
 function Login() {
   const { login } = useContext(UserContext);
@@ -17,7 +17,7 @@ function Login() {
       await login({ username, password });
       setMessage(`Welcome, ${username}! You have successfully logged in.`);
       setTimeout(() => {
-        history.push('/Home'); // Redirect to the main page
+        history.push('/reviews'); // Redirect to the reviews page
       }, 2000); // Delay in milliseconds before redirection
     } catch (error) {
       console.error("Error during login:", error);

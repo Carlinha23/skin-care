@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SkinApi from './SkinApi';
 import { UserContext } from './UserContext';
-//import './Profile.css';
+import './Profile.css';
 
 function Profile() {
   const { currentUser, setUser } = useContext(UserContext);

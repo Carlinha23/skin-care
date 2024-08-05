@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from './UserContext';
-//import './Signup.css';
+import './Signup.css';
 
 function Signup() {
   const { signup } = useContext(UserContext);
@@ -12,6 +13,8 @@ function Signup() {
     email: ''
   });
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState('');
+  const history = useHistory();
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -26,8 +29,13 @@ function Signup() {
 
     try {
       await signup(formData);
+      setMessage(`Welcome, ${formData.username}! You have successfully signed up and are now logged in.`);
+      setTimeout(() => {
+        history.push('/reviews'); // Redirect to the reviews page
+      }, 2000); // Delay in milliseconds before redirection
     } catch (err) {
-      setError(err);
+      setError('An error occurred during signup. Please try again.');
+      console.error("Error during signup:", err);
     }
   }
 
@@ -79,11 +87,10 @@ function Signup() {
         />
         <button type="submit">Signup</button>
         {error && <p className="error">{error}</p>}
+        {message && <p className="success">{message}</p>}
       </form>
     </div>
   );
 }
 
-
 export default Signup;
-
