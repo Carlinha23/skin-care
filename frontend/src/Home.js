@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import './Home.css'; 
-import logo from './images/logo.png';
+//import logo from './images/logo.png';
 
 function Home() {
   const [searchQuery] = useState('');
@@ -55,10 +55,11 @@ function Home() {
       return matchesQuery && matchesCategory;
     });
 
+  
+
   return (
     <div className="home-container">
       <div className="welcome-info">
-        <img src={logo} alt="SkinCare Review Logo" className="navbar-logo" />
         <div className="info-text">
           <p>Become a skincare expert in our community! Share your insights, tips, and experiences with others who are passionate about skincare. Your review can make a difference!</p>
         </div>
@@ -71,9 +72,7 @@ function Home() {
           ))}
         </select>
         <button type="submit" className="search-button">Search</button>
-        <button onClick={handleAddReviewClick} className="add-review-button">
-          Add Review
-        </button>
+        <button onClick={handleAddReviewClick} className="add-review-button">Add Review</button>
       </form>
       <div className="reviews-list">
         {filteredReviews.length === 0 ? (

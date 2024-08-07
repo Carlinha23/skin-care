@@ -1,5 +1,4 @@
 import React from 'react';
-//import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { UserProvider } from './UserContext'; 
 import Signup from './Signup';
@@ -8,6 +7,7 @@ import Home from './Home';
 import Profile from './Profile';
 import NavBar from './Navigation';
 import Review from './Review';
+import Footer from './Footer';
 
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
             <Route exact path="/reviews" component={Review} /> 
             <Route exact path="/" component={Home} />
           </Switch>
+          <Footer />
         </BrowserRouter>
       </UserProvider>
     );

@@ -35,7 +35,7 @@ function NavBar() {
               <NavLink to="/login" className="nav-link-custom">Login</NavLink>
             </NavItem>
             <NavItem className="nav-item">
-              <NavLink to="/signup" className="nav-link-custom">Signup</NavLink>
+              <NavLink to="/signup" className="nav-link-custom">Sign up</NavLink>
             </NavItem>
           </>
         )}
