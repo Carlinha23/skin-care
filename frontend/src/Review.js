@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import './Review.css';
 
 function Review() {
@@ -15,6 +15,9 @@ function Review() {
     image: ''
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [visibleReviews, setVisibleReviews] = useState(5); // Initial number of reviews
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -43,9 +46,24 @@ function Review() {
   }, []);
 
   useEffect(() => {
-    // Check if user is authenticated by checking the token
     const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) { // Show button after scrolling down 300px
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   async function handleSubmit(evt) {
@@ -100,6 +118,16 @@ function Review() {
   const handleSignupClick = () => {
     history.push('/signup');
   };
+
+  const handleLoadMore = () => {
+    setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5);
+  };
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const filteredReviews = reviews.filter(review => !selectedCategory || review.categoryId === parseInt(selectedCategory));
 
   return (
     <div className="review-container">
@@ -170,29 +198,36 @@ function Review() {
         </div>
       )}
       <div className="reviews-list">
-        {reviews
-          .filter(review => !selectedCategory || review.categoryId === parseInt(selectedCategory))
-          .map(review => (
-            <div key={review.id} className="review-item">
+        {filteredReviews.slice(0, visibleReviews).map(review => (
+          <div key={review.id} className="review-item">
+            <Link to={`/reviews/${review.id}`} className="review-link">
               <h3>{review.productname || 'No product name'}</h3>
-              <div className="review-details">
-                <span className="review-label">Brand:</span>
-                <span className="review-value">{review.brand}</span>
-                
-                <span className="review-label">Comment:</span>
-                <span className="review-value">{review.comment}</span>
-                
-                <span className="review-label">Date:</span>
-                <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
-              </div>
-              {review.image && review.image.trim() !== '' && (
-                <img src={review.image} alt={review.productname || 'Image'} />
-              )}
+            </Link>
+            <div className="review-details">
+              <span className="review-label">Brand:</span>
+              <span className="review-value">{review.brand}</span>
+              
+              <span className="review-label">Comment:</span>
+              <span className="review-value">{review.comment}</span>
+              
+              <span className="review-label">Date:</span>
+              <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
             </div>
-          ))}
+            {review.image && review.image.trim() !== '' && (
+              <img src={review.image} alt={review.productname || 'Image'} />
+            )}
+          </div>
+        ))}
+        {filteredReviews.length > visibleReviews && (
+          <button onClick={handleLoadMore} className="load-more-button">Load More</button>
+        )}
       </div>
-    </div>
+      {showScrollToTop && (
+        <button onClick={handleScrollToTop} className="scroll-to-top-button">↑</button>
+      )}
+      </div>
   );
 }
 
 export default Review;
+

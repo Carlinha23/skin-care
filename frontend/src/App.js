@@ -8,6 +8,7 @@ import Profile from './Profile';
 import NavBar from './Navigation';
 import Review from './Review';
 import Footer from './Footer';
+import ReviewDetails from './ReviewDetails';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/reviews" component={Review} /> 
+            <Route exact path="/reviews" component={Review} />
+            <Route path="/reviews/:id" component={ReviewDetails} /> 
             <Route exact path="/" component={Home} />
           </Switch>
           <Footer />

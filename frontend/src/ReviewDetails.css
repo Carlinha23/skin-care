@@ -1,0 +1,65 @@
+.review-details-container {
+  padding: 20px;
+  background-color: #f4f4f4;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.back-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #245580;;
+  color: #245580;;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #1d4b72;
+}
+
+.review-details {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review-details h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+.review-details .review-label {
+  color: #000;
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+.review-details .review-value {
+  color: #2c3e50;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review-details .review-date {
+  font-style: italic;
+  color: #000;
+  margin-top: 5px;
+}
+
+.review-image {
+  max-width: 200px;
+  max-height: 150px;
+  object-fit: cover;
+  display: block;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+

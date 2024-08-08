@@ -171,3 +171,57 @@
 .review-date {
   color: #2c3e50; /* Color for date */
 }
+
+.load-more-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #245580; /* Customize the color as needed */
+  color: white;
+  margin-top: 20px;
+}
+
+.load-more-button:hover {
+  background-color: #1d4b72; /* Customize the hover color */
+}
+
+.review-item img {
+  max-width: 200px; /* Adjust width as needed */
+  max-height: 150px; /* Adjust height as needed */
+  object-fit: cover; /* Ensure images are covered within the specified dimensions */
+  display: block; /* Ensure images appear as block elements */
+  margin-top: 10px; /* Space above the image */
+  border-radius: 4px; /* Optional: Add rounded corners */
+}
+
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 50%;
+  right: 10%;
+  transform: translate(-50%); /* Center it horizontally and move it up vertically */
+  background-color: #1d4b72;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 1; /* Ensure it's fully visible */
+  transition: opacity 0.3s ease;
+}
+
+.scroll-to-top-button:hover {
+  background-color: #0056b3;
+}
+
+.scroll-to-top-button.hidden {
+  opacity: 0;
+  visibility: hidden;
+}

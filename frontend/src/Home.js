@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import './Home.css'; 
-//import logo from './images/logo.png';
+import { useHistory, Link } from 'react-router-dom';
+import './Home.css';
 
 function Home() {
   const [searchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [reviews, setReviews] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [visibleReviews, setVisibleReviews] = useState(5); // Number of reviews to display initially
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   const history = useHistory();
   
   useEffect(() => {
@@ -35,6 +36,22 @@ function Home() {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) { // Show button after scrolling down 300px
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
@@ -55,7 +72,13 @@ function Home() {
       return matchesQuery && matchesCategory;
     });
 
-  
+  const handleLoadMore = () => {
+    setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5); // Increase the number of reviews to show
+  };
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="home-container">
@@ -80,9 +103,11 @@ function Home() {
             It looks like there are no reviews for this category yet. Click the 'Add Review' button and be the first to share your thoughts!
           </p>
         ) : (
-          filteredReviews.map(review => (
+          filteredReviews.slice(0, visibleReviews).map(review => (
             <div key={review.id} className="review-item">
-              <h3>{review.productname || 'No product name'}</h3>
+              <Link to={`/reviews/${review.id}`} className="review-link"> {/* Add a link to the review details */}
+                <h3>{review.productname || 'No product name'}</h3>
+              </Link>
               <div className="review-details">
                 <div>
                   <span className="review-label">Brand:</span>
@@ -101,8 +126,14 @@ function Home() {
             </div>
           ))
         )}
+        {filteredReviews.length > visibleReviews && (
+          <button onClick={handleLoadMore} className="load-more-button">Load More</button>
+        )}
       </div>
-    </div>
+      {showScrollToTop && (
+        <button onClick={handleScrollToTop} className="scroll-to-top-button">↑</button>
+      )}
+      </div>
   );
 }
 
