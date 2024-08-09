@@ -1,4 +1,13 @@
 /* Profile.css */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+}
 
 .profile-container {
     display: flex;
@@ -10,6 +19,10 @@
     padding: 20px;
   }
   
+  .profile-container h1 {
+    color: #2c3e50;
+  }
+
   .profile-form {
     background-color: #fff; /* White background for the form */
     border: 1px solid #ddd; /* Light border around the form */
@@ -18,12 +31,13 @@
     width: 100%;
     max-width: 400px; /* Limit form width */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    align-items: center;
   }
   
   .profile-form label {
     display: block;
     font-size: 1rem;
-    color: #333;
+    color: #2c3e50;
     margin-bottom: 5px;
   }
   
@@ -38,7 +52,6 @@
   }
   
   .profile-form button {
-    width: 100%; /* Full width button */
     padding: 10px;
     font-size: 1rem;
     border: none;
@@ -47,6 +60,10 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.3s; /* Smooth transition for button color */
+    width: 150px; /* Fixed width to control the button size */
+    max-width: 100%; /* Ensure it doesn’t exceed its container's width */
+    margin: 20px auto 0; /* Center the button horizontally and add top margin */
+    display: block; /* Ensure it behaves as a block element for margin auto to work */
   }
   
   .profile-form button:hover {

@@ -23,7 +23,7 @@
   .signup-form label {
     display: block;
     font-size: 1rem;
-    color: #333;
+    color: #2c3e50;
     margin-bottom: 5px;
   }
   
@@ -38,7 +38,6 @@
   }
   
   .signup-form button {
-    width: 100%; /* Full width button */
     padding: 10px;
     font-size: 1rem;
     border: none;
@@ -46,6 +45,11 @@
     background-color: #245580; /* Button color */
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for button color */
+    width: 150px; /* Fixed width to control the button size */
+    max-width: 100%; /* Ensure it doesn’t exceed its container's width */
+    margin: 20px auto 0; /* Center the button horizontally and add top margin */
+    display: block; /* Ensure it behaves as a block element for margin auto to work */
   }
   
   .signup-form button:hover {

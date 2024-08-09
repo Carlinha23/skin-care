@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
-import './Review.css';
+import './ReviewDetails.css';
 
 function ReviewDetails() {
   const { id } = useParams();
@@ -31,16 +31,20 @@ function ReviewDetails() {
 
   return (
     <div className="review-details-container">
-      <button onClick={() => history.goBack()} className="back-button"> Back </button>
+      <button onClick={() => history.goBack()} className="back-button">Back</button>
       <div className="review-details">
-        <h1>{review.productName}</h1>
-        <p><strong>Category:</strong> {review.categoryName}</p>
-        <p><strong>Brand:</strong> {review.brand}</p>
-        <p><strong>Comment:</strong> {review.comment}</p>
+        <h1>{review.productname}</h1>
+        <span className="review-label">Product:</span>
+        <span className="review-value">{review.productname}</span>
+        <span className="review-label">Brand:</span>
+        <span className="review-value">{review.brand}</span>
+        <span className="review-label">Comment:</span>
+        <span className="review-value">{review.comment}</span>
         {review.image && (
-          <img src={review.image} alt={review.productName} className="review-image"/>
+          <img src={review.image} alt={review.productname} className="review-image"/>
         )}
-        <p><strong>Date:</strong> {new Date(review.date).toLocaleDateString()}</p>
+        <span className="review-label">Date:</span>
+        <span className="review-value">{new Date(review.date).toLocaleDateString()}</span>
       </div>
     </div>
   );

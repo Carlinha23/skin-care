@@ -3,7 +3,7 @@
   background-size: cover; /* Cover the entire container */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Prevent repeating the image */
-  padding: 40px 20px; /* Add some padding inside the container */
+  padding: 80px 20px 20px;  /* Add some padding inside the container */
   text-align: center; /* Center-align the text */
   width: 100%;
   max-width: 1700px; /* Set a max-width for the container */

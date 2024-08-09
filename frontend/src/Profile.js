@@ -64,7 +64,7 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h1>Profile</h1>
+      <h1>Edit Profile</h1>
       <form onSubmit={handleSubmit} className="profile-form">
         <label>First Name</label>
         <input

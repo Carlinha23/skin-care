@@ -158,7 +158,8 @@ function Review() {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="input-group">
+              <div>
               <label>Product Name</label>
               <input
                 type="text"
@@ -175,6 +176,7 @@ function Review() {
                 value={newReview.brand}
                 onChange={handleChange}
               />
+            </div>
             </div>
             <div>
               <label>Comment</label>
@@ -204,6 +206,8 @@ function Review() {
               <h3>{review.productname || 'No product name'}</h3>
             </Link>
             <div className="review-details">
+
+
               <span className="review-label">Brand:</span>
               <span className="review-value">{review.brand}</span>
               

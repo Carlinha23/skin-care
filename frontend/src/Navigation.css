@@ -1,3 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+}
+
 /* Navigation.css */
 .navbar-custom {
     background-color: #efddbe; /* Soft light background */
@@ -7,6 +17,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Aligns the navbar to the top of the page */
+    left: 0;
+    width: 100%; /* Ensures the navbar spans the full width of the page */
+    z-index: 1000; /* Keeps the navbar above other content */
+    height: 60px;
   }
   
   .navbar-brand-custom {

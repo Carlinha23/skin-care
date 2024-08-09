@@ -1,5 +1,6 @@
+
 .review-container {
-  padding: 20px;
+  padding: 80px 20px 20px; 
   background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
@@ -19,12 +20,16 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px; /* Reduced padding for a smaller container */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin: 0 auto; /* Center align the container */
+  max-width: 600px; /* Set a maximum width for the container */
   color: #2c3e50;
   font-weight: bold;
+  margin-bottom: 30px;
 }
+
+
 
 .login-prompt {
   font-size: 1.2rem;
@@ -60,6 +65,24 @@
 
 .review-form div {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form .input-group {
+  display: flex;
+  gap: 15px; /* Space between the two fields */
+}
+
+.review-form .input-group div {
+  flex: 1; /* Make each input take half the space */
+}
+
+.review-form label {
+  display: block;
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 5px;
 }
 
 .review-form label {
@@ -93,6 +116,9 @@
   background-color: #28a745;
   color: white;
   cursor: pointer;
+  width: 150px; /* Fixed width to control the button size */
+  max-width: 100%; /* Ensure it doesn’t exceed its container's width */
+  margin: 0 auto; /* Center the button horizontally */
 }
 
 .review-form button:hover {
@@ -149,10 +175,6 @@
   color: #000; /* Black color for the date */
 }
 
-.review-item img {
-  max-width: 100%;
-  height: auto;
-}
 
 .load-more-button {
   padding: 10px 20px;
@@ -170,6 +192,7 @@
 }
 
 .review-item img {
+  height: auto;
   max-width: 200px; /* Adjust width as needed */
   max-height: 150px; /* Adjust height as needed */
   object-fit: cover; /* Ensure images are covered within the specified dimensions */
@@ -217,3 +240,4 @@
   opacity: 0;
   visibility: hidden;
 }
+
