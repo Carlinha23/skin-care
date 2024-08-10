@@ -26,6 +26,7 @@ html, body {
     width: 100%;
     max-width: 400px; /* Limit form width */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-weight: bold;
   }
   
   .login-form label {

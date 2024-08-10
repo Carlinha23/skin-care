@@ -109,21 +109,22 @@ function Home() {
                 <h3>{review.productname || 'No product name'}</h3>
               </Link>
               <div className="review-details">
-                <div>
-                  <span className="review-label">Brand:</span>
-                  <span className="review-value">{review.brand}</span>
-                </div>
-                <div>
-                  <span className="review-label">Comment:</span>
-                  <span className="review-value">{review.comment}</span>
-                </div>
-                <div>
-                  <span className="review-label">Date:</span>
-                  <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
-                </div>
-              </div>
-              {review.image && <img src={review.image} alt={review.productname || 'Image'} />}
-            </div>
+
+
+              <span className="review-label">Brand:</span>
+              <span className="review-value">{review.brand}</span>
+              
+              <span className="review-label">Comment:</span>
+              <span className="review-value">{review.comment}</span>
+              
+              <span className="review-label">Date:</span>
+              <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
+            
+            {review.image && review.image.trim() !== '' && (
+              <img src={review.image} alt={review.productname || 'Image'} />
+            )}
+          </div>
+          </div>
           ))
         )}
         {filteredReviews.length > visibleReviews && (
@@ -138,4 +139,6 @@ function Home() {
 }
 
 export default Home;
+
+
 

@@ -216,10 +216,11 @@ function Review() {
               
               <span className="review-label">Date:</span>
               <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
-            </div>
+            
             {review.image && review.image.trim() !== '' && (
               <img src={review.image} alt={review.productname || 'Image'} />
             )}
+          </div>
           </div>
         ))}
         {filteredReviews.length > visibleReviews && (

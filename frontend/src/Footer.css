@@ -1,5 +1,5 @@
 .footer {
-    background-color: #f4f4f4; /* Change to your preferred background color */
+    background-color: #efddbe; /* Change to your preferred background color */
     padding: 20px;
     text-align: center;
     border-top: 1px solid #ddd; /* Optional: adds a border line at the top of the footer */
@@ -29,4 +29,10 @@
   
   .footer-link i {
     font-size: 24px; /* Adjust size as needed */
+  }
+
+  .footer-text {
+    color: #245580; /* Text color */
+    font-size: 16px; /* Font size */
+    margin-top: 20px; /* Space above the text */
   }

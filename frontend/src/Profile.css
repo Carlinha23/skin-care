@@ -32,6 +32,7 @@ html, body {
     max-width: 400px; /* Limit form width */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     align-items: center;
+    font-weight: bold;
   }
   
   .profile-form label {

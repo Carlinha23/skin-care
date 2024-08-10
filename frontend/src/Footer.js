@@ -2,7 +2,6 @@ import React from 'react';
 import './Footer.css'; 
 import logo from './images/logo.png';
 
-
 const Footer = () => {
   return (
     <footer className="footer">
@@ -20,6 +19,9 @@ const Footer = () => {
           <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="footer-link">
             <i className="fa-brands fa-youtube"></i>
           </a>
+        </div>
+        <div className="footer-text">
+          © 2024 Skincare Review
         </div>
       </div>
     </footer>
