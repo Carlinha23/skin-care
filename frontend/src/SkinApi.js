@@ -36,30 +36,7 @@ class SkinApi {
 
   // // Individual API routes
 
-  // /** Get all companies. */
-  // static async getCompanies() {
-  //   let res = await this.request(`companies`);
-  //   return res.companies;
-  // }
-
-  // /** Get details on a company by handle. */
-
-  // static async getCompany(handle) {
-  //   let res = await this.request(`companies/${handle}`);
-  //   return res.company;
-  // }
-
-  // /** Get all jobs. */
-  // static async getJobs() {
-  //   let res = await this.request(`jobs`);
-  //   return res.jobs;
-  // }
-
-  // /** Get details on a job by ID. */
-  // static async getJob(id) {
-  //   let res = await this.request(`jobs/${id}`);
-  //   return res.job;
-  // }
+ 
 
    /** Register a new user and return the token. */
    static async register(data) {
@@ -98,41 +75,97 @@ class SkinApi {
     
     }
 
-    // static async getUserProfile(username) {
-    //     try {
-    //       let res = await this.request(`users/${username}`); // Adjust the endpoint as per your API
-    //       return res.user; // Assuming the response structure includes `user` field
-    //     } catch (err) {
-    //       console.error("API Error:", err.response.data);
-    //       throw err.response.data.error.message;
-    //     }
-    //   }
+  /** Create a new review. */
+  static async createReview(data) {
+    try {
+      let res = await this.request('reviews', data, 'post');
+      return res.review;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
 
-    // // Add this method to the JoblyApi class
-    // static async applyToJob(username, jobId) {
-    //  try {
-    //     let res = await axios.post(
-    //         `${BASE_URL}/users/${username}/jobs/${jobId}`,
-    //         {},
-    //         {
-    //         headers: { Authorization: `Bearer ${SkinApi.token}` }
-    //         }
-    //     );
-    //     return res;
-    //     } catch (err) {
-    //     console.error("API Error:", err.response.data);
-    //     throw err.response.data.error.message;
-    //     }
-    // }
-  
-  // obviously, you'll add a lot here ...
+  /** Get all reviews or filtered by category. */
+  static async getReviews(category) {
+    try {
+      let res = await this.request('reviews', { category }, 'get');
+      return res.reviews;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
+
+  /** Get a single review by ID. */
+  static async getReview(id) {
+    try {
+      let res = await this.request(`reviews/${id}`, {}, 'get');
+      return res.review;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
+
+  /** Create a new category. */
+  static async createCategory(data) {
+    try {
+      let res = await this.request('categories', data, 'post');
+      return res.category;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
+
+  /** Get all categories. */
+  static async getCategories() {
+    try {
+      let res = await this.request('categories', {}, 'get');
+      return res.categories;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
+
+  /** Get a single category by ID. */
+  static async getCategory(id) {
+    try {
+      let res = await this.request(`categories/${id}`, {}, 'get');
+      return res.category;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
+
+  /** Update a category by ID. */
+  static async updateCategory(id, data) {
+    try {
+      let res = await this.request(`categories/${id}`, data, 'patch');
+      return res.category;
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
+
+  /** Delete a category by ID. */
+  static async deleteCategory(id) {
+    try {
+      await this.request(`categories/${id}`, {}, 'delete');
+      return { deleted: id };
+    } catch (err) {
+      console.error("API Error:", err);
+      throw err;
+    }
+  }
 }
 
 export default SkinApi; 
-// for now, put token ("testuser" / "password" on class)
-//JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    //"SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    //"FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+
 
 
     
