@@ -34,32 +34,32 @@ class SkinApi {
     }
   }
 
-  // Individual API routes
+  // // Individual API routes
 
-  /** Get all companies. */
-  static async getCompanies() {
-    let res = await this.request(`companies`);
-    return res.companies;
-  }
+  // /** Get all companies. */
+  // static async getCompanies() {
+  //   let res = await this.request(`companies`);
+  //   return res.companies;
+  // }
 
-  /** Get details on a company by handle. */
+  // /** Get details on a company by handle. */
 
-  static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
-    return res.company;
-  }
+  // static async getCompany(handle) {
+  //   let res = await this.request(`companies/${handle}`);
+  //   return res.company;
+  // }
 
-  /** Get all jobs. */
-  static async getJobs() {
-    let res = await this.request(`jobs`);
-    return res.jobs;
-  }
+  // /** Get all jobs. */
+  // static async getJobs() {
+  //   let res = await this.request(`jobs`);
+  //   return res.jobs;
+  // }
 
-  /** Get details on a job by ID. */
-  static async getJob(id) {
-    let res = await this.request(`jobs/${id}`);
-    return res.job;
-  }
+  // /** Get details on a job by ID. */
+  // static async getJob(id) {
+  //   let res = await this.request(`jobs/${id}`);
+  //   return res.job;
+  // }
 
    /** Register a new user and return the token. */
    static async register(data) {
@@ -98,32 +98,32 @@ class SkinApi {
     
     }
 
-    static async getUserProfile(username) {
-        try {
-          let res = await this.request(`users/${username}`); // Adjust the endpoint as per your API
-          return res.user; // Assuming the response structure includes `user` field
-        } catch (err) {
-          console.error("API Error:", err.response.data);
-          throw err.response.data.error.message;
-        }
-      }
+    // static async getUserProfile(username) {
+    //     try {
+    //       let res = await this.request(`users/${username}`); // Adjust the endpoint as per your API
+    //       return res.user; // Assuming the response structure includes `user` field
+    //     } catch (err) {
+    //       console.error("API Error:", err.response.data);
+    //       throw err.response.data.error.message;
+    //     }
+    //   }
 
-    // Add this method to the JoblyApi class
-    static async applyToJob(username, jobId) {
-     try {
-        let res = await axios.post(
-            `${BASE_URL}/users/${username}/jobs/${jobId}`,
-            {},
-            {
-            headers: { Authorization: `Bearer ${SkinApi.token}` }
-            }
-        );
-        return res;
-        } catch (err) {
-        console.error("API Error:", err.response.data);
-        throw err.response.data.error.message;
-        }
-    }
+    // // Add this method to the JoblyApi class
+    // static async applyToJob(username, jobId) {
+    //  try {
+    //     let res = await axios.post(
+    //         `${BASE_URL}/users/${username}/jobs/${jobId}`,
+    //         {},
+    //         {
+    //         headers: { Authorization: `Bearer ${SkinApi.token}` }
+    //         }
+    //     );
+    //     return res;
+    //     } catch (err) {
+    //     console.error("API Error:", err.response.data);
+    //     throw err.response.data.error.message;
+    //     }
+    // }
   
   // obviously, you'll add a lot here ...
 }
