@@ -12,8 +12,8 @@
 // // Use dev database, testing database, or via env var, production database
 // function getDatabaseUri() {
 //   return (process.env.NODE_ENV === "test")
-//       ? "postgresql:///skin-care2_test"
-//       : process.env.DATABASE_URL || "postgresql:///skin-care2";
+//       ? "postgresql:///skin_care3_test"
+//       : process.env.DATABASE_URL || "postgresql:///skin_care3";
 // }
 
 // // Speed up bcrypt during tests, since the algorithm safety isn't being tested
