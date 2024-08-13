@@ -79,7 +79,7 @@ class SkinApi {
   /** Create a new review. */
   static async createReview(data) {
     try {
-      let res = await this.request('reviews', data, 'post');
+      let res = await this.request('api/reviews', data, 'post');
       return res.review;
     } catch (err) {
       console.error("API Error:", err);
@@ -90,7 +90,7 @@ class SkinApi {
   /** Get all reviews or filtered by category. */
   static async getReviews(category) {
     try {
-      let res = await this.request('reviews', { category }, 'get');
+      let res = await this.request('api/reviews', { category }, 'get');
       return res.reviews;
     } catch (err) {
       console.error("API Error:", err);
@@ -101,7 +101,7 @@ class SkinApi {
   /** Get a single review by ID. */
   static async getReview(id) {
     try {
-      let res = await this.request(`reviews/${id}`, {}, 'get');
+      let res = await this.request(`api/reviews/${id}`, {}, 'get');
       return res.review;
     } catch (err) {
       console.error("API Error:", err);
@@ -112,7 +112,7 @@ class SkinApi {
   /** Create a new category. */
   static async createCategory(data) {
     try {
-      let res = await this.request('categories', data, 'post');
+      let res = await this.request('api/categories', data, 'post');
       return res.category;
     } catch (err) {
       console.error("API Error:", err);
@@ -123,7 +123,7 @@ class SkinApi {
   /** Get all categories. */
   static async getCategories() {
     try {
-      let res = await this.request('categories', {}, 'get');
+      let res = await this.request('api/categories', {}, 'get');
       return res.categories;
     } catch (err) {
       console.error("API Error:", err);
@@ -134,7 +134,7 @@ class SkinApi {
   /** Get a single category by ID. */
   static async getCategory(id) {
     try {
-      let res = await this.request(`categories/${id}`, {}, 'get');
+      let res = await this.request(`api/categories/${id}`, {}, 'get');
       return res.category;
     } catch (err) {
       console.error("API Error:", err);
@@ -145,7 +145,7 @@ class SkinApi {
   /** Update a category by ID. */
   static async updateCategory(id, data) {
     try {
-      let res = await this.request(`categories/${id}`, data, 'patch');
+      let res = await this.request(`api/categories/${id}`, data, 'patch');
       return res.category;
     } catch (err) {
       console.error("API Error:", err);
@@ -156,7 +156,7 @@ class SkinApi {
   /** Delete a category by ID. */
   static async deleteCategory(id) {
     try {
-      await this.request(`categories/${id}`, {}, 'delete');
+      await this.request(`api/categories/${id}`, {}, 'delete');
       return { deleted: id };
     } catch (err) {
       console.error("API Error:", err);
