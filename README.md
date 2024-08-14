@@ -44,11 +44,25 @@ The application is deployed with Render.
 
 3. Seed Data:
    ```psql < skin-care.sql```
+
+4.	**Install dependencies:**
+```npm install```
+
+5.	**Start the backend server:**
+```npm start```
+
+### Front End
+1.	**Change Directory from Backend to Frontend folder:**
+```cd ..
+cd frontend```
+
+2.	**Install dependencies:**
+```npm install```
+
+3.	**Start the front-end react app:**
+```npm start```
+
    
-
-
-
-
 
 ### Website Features 
 
