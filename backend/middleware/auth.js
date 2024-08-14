@@ -14,12 +14,14 @@ function authenticateJWT(req, res, next) {
     const authHeader = req.headers && req.headers.authorization;
     if (authHeader) {
       const token = authHeader.replace(/^[Bb]earer /, "").trim();
+      console.log("Extracted Token:", token);
       const payload = jwt.verify(token, SECRET_KEY);
       res.locals.user = payload;
       console.log("Authenticated User:", res.locals.user); // Log the user info
     }
     return next();
   } catch (err) {
+    console.error("JWT Verification Error:", err);
     return next();
   }
 }
