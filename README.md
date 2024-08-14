@@ -43,6 +43,15 @@ The application is deployed with Render.
     ```bash
   	cd backend```
 
+3.**Seed Data:**
+   ```bash
+psql < skin-care.sql
+
+4.**Install dependencies:**
+   ```bash
+npm install
+
+
 
 
 
