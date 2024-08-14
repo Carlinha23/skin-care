@@ -132,20 +132,14 @@ function Review() {
   return (
     <div className="review-container">
       <h1>Share Your Skincare Experience!</h1>
-      {!isAuthenticated && (
+  {!isAuthenticated && (
+    <p className="login-prompt">Please log in or sign up to add a review and help others discover the best skincare products!</p>
+  )}
+  {isAuthenticated && (
+    <div className="review-form-container">
+      <p>We’d love to hear about your favorite products and experiences! Your review will help others in their skincare journey. Share your thoughts below:</p>
+      <form onSubmit={handleSubmit} className="review-form">
         <div>
-          <p className="login-prompt">Please log in or sign up to add a review and help others discover the best skincare products!</p>
-          <div className="auth-buttons">
-            <button onClick={handleLoginClick} className="auth-button">Login</button>
-            <button onClick={handleSignupClick} className="auth-button">Signup</button>
-          </div>
-        </div>
-      )}
-      {isAuthenticated && (
-        <div className="review-form-container">
-          <p>We’d love to hear about your favorite products and experiences! Your review will help others in their skincare journey. Share your thoughts below:</p>
-          <form onSubmit={handleSubmit} className="review-form">
-            <div>
               <label>Category</label>
               <select
                 name="categoryName"
