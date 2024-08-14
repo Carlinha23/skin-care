@@ -4,6 +4,9 @@
 
 Skincare Review is a web application designed for skincare enthusiasts to make informed decisions about products based on genuine user reviews, free from advertising and brand partnerships. Focused on facial skincare products, the platform allows users to share their experiences with specific products, helping others choose the best options for skin improvement.
 
+## Project Goal
+The goal of this project is to provide information about facial skincare products. Users can search for products by category, making it easier to access and learn about different options.
+
 ## Tech Stack
 
 ### Frontend
@@ -35,6 +38,46 @@ The application is deployed with Render.
 
    ```bash
    git clone https://github.com/Carlinha23/skin-care
+
+2.	**Change Directory to backend folder**
+
+```bash
+cd backend
+
+3.	**Seed Data:**
+```bash
+psql < skin-care.sql
+
+4.	**Install dependencies:**
+```bash
+npm install
+
+5.	**Start the backend server:**
+```bash
+npm start
+
+### Front End
+
+1.	**Change Directory from Backend to Frontend folder:**
+```bash
+cd ..
+cd frontend
+
+2.	**Install dependencies:**
+```bash
+npm install
+
+3.	**Start the front-end react app:**
+```bash
+npm start
+
+### Website Features 
+
+
+
+
+
+
 
 
 
