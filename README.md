@@ -39,17 +39,12 @@ The application is deployed with Render.
    ```bash
    git clone https://github.com/Carlinha23/skin-care
 
-2.	**Change Directory to backend folder:**
-    ```
-  	cd backend```
+2. Change Directory to backend folder:
+   cd backend
 
-3.**Seed Data:**
-   ```
-psql < skin-care.sql```
-
-4.**Install dependencies:**
-   ```
-npm install```
+3. Seed Data:
+   psql < skin-care.sql
+   
 
 
 
