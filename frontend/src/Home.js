@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import './Home.css';
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com";
 
 function Home() {
   const [searchQuery] = useState('');
@@ -15,7 +16,7 @@ function Home() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const res = await axios.get('/api/reviews');
+        const res = await axios.get(`${BASE_URL}/api/reviews`);
         console.log("Fetched reviews:", res.data.reviews); 
         setReviews(res.data.reviews);
       } catch (error) {
@@ -25,7 +26,7 @@ function Home() {
     
     async function fetchCategories() {
       try {
-        const res = await axios.get('/api/categories');
+        const res = await axios.get(`${BASE_URL}/api/categories`);
         setCategories(res.data.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
