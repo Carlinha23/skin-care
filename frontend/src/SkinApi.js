@@ -3,20 +3,15 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com";
 
 
-/** API Class.
- *
- * Static class tying together methods used to get/send to to the API.
- * There shouldn't be any frontend-specific stuff here, and there shouldn't
- * be any API-aware stuff elsewhere in the frontend.
- *
- */
-
 class SkinApi {
   // the token for interactive with the API will be stored here.
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
+
+    // Log the token being used
+    console.debug("Authorization Token:", SkinApi.token);
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
@@ -54,7 +49,11 @@ class SkinApi {
   static async login(data) {
     try {
       let res = await axios.post(`${BASE_URL}/auth/token`, data);
-      return res.data.token;
+      // Store the token
+      SkinApi.token = res.data.token;
+      // Log the token
+      console.debug("Logged-in Token:", SkinApi.token);
+      return SkinApi.token;
     } catch (err) {
       console.error("API Error:", err.response.data);
       throw err.response.data.error.message;

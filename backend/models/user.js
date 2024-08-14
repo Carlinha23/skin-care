@@ -14,12 +14,6 @@ const { BCRYPT_WORK_FACTOR } = require("../config.js");
 /** Related functions for users. */
 
 class User {
-  /** authenticate user with username, password.
-   *
-   * Returns { username, firstName, lastName, email, isAdmin }
-   *
-   * Throws UnauthorizedError is user not found or wrong password.
-   **/
 
   static async authenticate(username, password) {
     // try to find the user first
