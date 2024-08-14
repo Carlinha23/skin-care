@@ -23,7 +23,7 @@ function Review() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const res = await axios.get('/api/reviews');
+        const res = await axios.get(`${BASE_URL}/api/reviews`);
         console.log("Fetched reviews:", res.data.reviews);
         setReviews(res.data.reviews);
       } catch (error) {
@@ -36,7 +36,7 @@ function Review() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await axios.get('/api/categories');
+        const res = await axios.get(`${BASE_URL}/api/categories`);
         setCategories(res.data.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
