@@ -85,7 +85,7 @@ function Review() {
       console.log("Sending data:", newReview);
       console.log("With headers:", { Authorization: `Bearer ${token}` });
 
-      await axios.post('/api/reviews', reviewData, {
+      await axios.post(`${BASE_URL}/api/reviews`, reviewData, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -97,7 +97,7 @@ function Review() {
         image: ''
       });
       history.push('/reviews');
-      const res = await axios.get('/api/reviews');
+      const res = await axios.get(`${BASE_URL}/api/reviews`);
       setReviews(res.data.reviews);
     } catch (err) {
       console.error("Error during review submission:", err.response ? err.response.data : err.message);
