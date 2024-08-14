@@ -39,13 +39,13 @@ The application is deployed with Render.
    ```bash
    git clone https://github.com/Carlinha23/skin-care
 
-2. Change Directory to backend folder:
+2. **Change Directory to backend folder:**
    ```cd backend```
 
-3. Seed Data:
+3. **Seed Data:**
    ```psql < skin-care.sql```
 
-4.	**Install dependencies:**
+4.	**Intall dependencies**
 ```npm install```
 
 5.	**Start the backend server:**
@@ -53,8 +53,8 @@ The application is deployed with Render.
 
 ### Front End
 1.	**Change Directory from Backend to Frontend folder:**
-```cd ..
-cd frontend```
+```cd ..```
+```cd frontend```
 
 2.	**Install dependencies:**
 ```npm install```
