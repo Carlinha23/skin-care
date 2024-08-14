@@ -40,10 +40,10 @@ The application is deployed with Render.
    git clone https://github.com/Carlinha23/skin-care
 
 2. Change Directory to backend folder:
-   cd backend
+   ```cd backend
 
 3. Seed Data:
-   psql < skin-care.sql
+   ```psql < skin-care.sql
    
 
 
