@@ -41,35 +41,35 @@ The application is deployed with Render.
 
 2.	**Change Directory to backend folder:**
 
-
-cd backend
+   ```bash
+   cd backend
 
 3.	**Seed Data:**
-
-psql < skin-care.sql
+   ```bash
+   psql < skin-care.sql
 
 4.	**Install dependencies:**
-
-npm install
+    ```bash   
+   npm install
 
 5.	**Start the backend server:**
-
-npm start
+    ```bash
+   npm start
 
 ### Front End
 
 1.	**Change Directory from Backend to Frontend folder:**
-
-cd ..
-cd frontend
+    ```bash
+   cd ..
+   cd frontend
 
 2.	**Install dependencies:**
-
-npm install
+    ```bash
+   npm install
 
 3.	**Start the front-end react app:**
-
-npm start
+    ```bash
+   npm start
 
 ### Website Features 
 
