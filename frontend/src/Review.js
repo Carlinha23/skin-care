@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 import './Review.css';
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com";
 
 function Review() {
   const [reviews, setReviews] = useState([]);
