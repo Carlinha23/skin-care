@@ -1,9 +1,9 @@
 \echo 'Delete and recreate skin-care db?'
 \prompt 'Return for yes or control-C to cancel > ' foo
 
-DROP DATABASE IF EXISTS "skin_care3";
-CREATE DATABASE "skin_care3";
-\connect "skin_care3"
+DROP DATABASE IF EXISTS "skin-care2";
+CREATE DATABASE "skin-care2";
+\connect "skin-care2"
 
 \i skin-care-schema.sql
 \i skin-care-seed.sql
