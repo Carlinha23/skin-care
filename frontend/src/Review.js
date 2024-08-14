@@ -112,13 +112,13 @@ function Review() {
     }));
   }
 
-  const handleLoginClick = () => {
-    history.push('/login');
-  };
+  // const handleLoginClick = () => {
+  //   history.push('/login');
+  // };
 
-  const handleSignupClick = () => {
-    history.push('/signup');
-  };
+  // const handleSignupClick = () => {
+  //   history.push('/signup');
+  // };
 
   const handleLoadMore = () => {
     setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5);
