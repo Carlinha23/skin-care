@@ -40,7 +40,7 @@ The application is deployed with Render.
    git clone https://github.com/Carlinha23/skin-care
 
 2.	**Change Directory to backend folder:**
-    ```bash	cd backend
+    ```cd backend
 
 
 
