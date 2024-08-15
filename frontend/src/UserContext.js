@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import SkinApi from './SkinApi';
+import axios from 'axios';
 
 
 export const UserContext = createContext(); 
@@ -14,9 +15,17 @@ export function UserProvider({ children }) {
       if (token) {
         try {
           const { username } = jwtDecode(token);
+          console.log("Decoded username:", username); // Debug log
           SkinApi.token = token;
-          const user = await SkinApi.getUserProfile(username);
+
+          const res = await axios.get(`${process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com"}/users/${username}`, {
+            headers: { Authorization: `Bearer ${SkinApi.token}` },
+          });
+
+          const user = res.data;
+          console.log("Fetched user:", user);
           setCurrentUser(user);
+
         } catch (err) {
           console.error("Failed to fetch user", err);
           setCurrentUser(null);

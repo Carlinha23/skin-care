@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, NavItem } from 'reactstrap';
 import { UserContext } from './UserContext';
@@ -7,6 +7,7 @@ import logo from './images/logo.png';
 
 function NavBar() {
   const { currentUser, logout } = useContext(UserContext);
+  const username = currentUser?.user?.username;
 
   return (
     <Navbar expand="md" className="navbar-custom">
@@ -20,7 +21,7 @@ function NavBar() {
               <NavLink to="/reviews" className="nav-link-custom">Reviews</NavLink>
             </NavItem>
             <NavItem className="nav-item">
-              <NavLink to="/profile" className="nav-link-custom">Hi, {currentUser.username}</NavLink>
+              <NavLink to="/profile" className="nav-link-custom">Hi, {username}</NavLink>
             </NavItem>
             <NavItem className="nav-item">
               <NavLink to="/" onClick={logout} className="nav-link-custom">Logout</NavLink>
