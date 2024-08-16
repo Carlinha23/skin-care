@@ -40,7 +40,8 @@
 .auth-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .auth-button {
@@ -239,5 +240,16 @@
 .scroll-to-top-button.hidden {
   opacity: 0;
   visibility: hidden;
+}
+
+.login-signup-container {
+  text-align: center; /* Center-aligns the text and buttons */
+  margin-bottom: 20px; /* Adds space below the container */
+}
+
+.login-prompt {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: bold;
 }
 

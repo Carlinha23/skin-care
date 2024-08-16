@@ -116,13 +116,13 @@ function Review() {
     }));
   }
 
-  // const handleLoginClick = () => {
-  //   history.push('/login');
-  // };
+   const handleLoginClick = () => {
+     history.push('/login');
+   };
 
-  // const handleSignupClick = () => {
-  //   history.push('/signup');
-  // };
+   const handleSignupClick = () => {
+     history.push('/signup');
+   };
 
   const handleLoadMore = () => {
     setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5);
@@ -138,7 +138,13 @@ function Review() {
     <div className="review-container">
       <h1>Share Your Skincare Experience!</h1>
   {!isAuthenticated && (
-    <p className="login-prompt">Please log in or sign up to add a review and help others discover the best skincare products!</p>
+    <div className="login-signup-container">
+      <p className="login-prompt">Please log in or sign up to add a review and help others discover the best skincare products!</p>
+      <div className="auth-buttons">
+      <button onClick={handleLoginClick} className="auth-button">Login</button>
+      <button onClick={handleSignupClick} className="auth-button">Sign Up</button>
+    </div>
+    </div>
   )}
   {isAuthenticated && (
     <div className="review-form-container">
@@ -201,7 +207,7 @@ function Review() {
 
       {/* Display the success message */}
       {successMessage && <div className="success-message">{successMessage}</div>}
-      
+
       <div className="reviews-list">
         {filteredReviews.slice(0, visibleReviews).map(review => (
           <div key={review.id} className="review-item">

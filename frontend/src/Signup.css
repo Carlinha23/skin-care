@@ -10,6 +10,11 @@
     padding: 20px;
   }
   
+  .signup-container h1 {
+    font-size: 2.0rem;
+    color: #2c3e50;
+  }
+
   .signup-form {
     background-color: #fff; /* White background for the form */
     border: 1px solid #ddd; /* Light border around the form */
