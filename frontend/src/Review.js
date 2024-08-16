@@ -18,6 +18,7 @@ function Review() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [visibleReviews, setVisibleReviews] = useState(5); // Initial number of reviews
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const history = useHistory();
 
@@ -97,6 +98,9 @@ function Review() {
         image: ''
       });
       history.push('/reviews');
+
+      setSuccessMessage("Your review was published successfully. Continue sharing or explore more products."); // Set success message
+
       const res = await axios.get(`${BASE_URL}/api/reviews`);
       setReviews(res.data.reviews);
     } catch (err) {
@@ -194,6 +198,10 @@ function Review() {
           </form>
         </div>
       )}
+
+      {/* Display the success message */}
+      {successMessage && <div className="success-message">{successMessage}</div>}
+      
       <div className="reviews-list">
         {filteredReviews.slice(0, visibleReviews).map(review => (
           <div key={review.id} className="review-item">
