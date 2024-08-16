@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
 import './ReviewDetails.css';
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com";
 
 function ReviewDetails() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ function ReviewDetails() {
   useEffect(() => {
     async function fetchReview() {
       try {
-        const res = await axios.get(`/api/reviews/${id}`);
+        const res = await axios.get(`${BASE_URL}/api/reviews/${id}`);
         setReview(res.data.review);
       } catch (err) {
         setError('Error fetching review details');
