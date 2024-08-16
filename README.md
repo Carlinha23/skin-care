@@ -66,6 +66,10 @@ The application is deployed with Render.
 
 ### Website Features 
 
+**Home Page**
+<img width="785" alt="home page" src="https://github.com/user-attachments/assets/6cae3dfb-2ef9-42b0-875e-40578f0f5216">
+
+
 
 
 
