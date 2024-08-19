@@ -1,6 +1,5 @@
 "use strict";
 
-/** Routes for users. */
 
 const jsonschema = require("jsonschema");
 
@@ -11,8 +10,6 @@ const User = require("../models/user");
 const { createToken } = require("../helpers/tokens");
 const userNewSchema = require("../schemas/userNew.json");
 const userUpdateSchema = require("../schemas/userUpdate.json");
-//const userRegister = require("../schemas/userRegister.json");
-//const userAuth = require("../schema/userAuth.json");
 const { authenticateJWT } = require("../middleware/auth");
 
 const router = express.Router();
