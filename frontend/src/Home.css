@@ -119,6 +119,28 @@
   outline: none;
 }
 
+.product-search-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  width: 250px;
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  appearance: none;
+}
+
+.product-search-input {
+  padding: 10px;
+}
+
+.product-search-input {
+  border-color: #245580;
+  outline: none;
+}
+
 .home-container h1 {
   color: #2c3e50;
   font-family: 'Lora', serif;

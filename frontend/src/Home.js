@@ -5,7 +5,7 @@ import './Home.css';
 const BASE_URL = process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com";
 
 function Home() {
-  const [searchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [reviews, setReviews] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -57,6 +57,10 @@ function Home() {
     setSelectedCategory(event.target.value);
   };
 
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     console.log("Searching for:", searchQuery, "Category:", selectedCategory);
@@ -89,6 +93,14 @@ function Home() {
         </div>
       </div>
       <form onSubmit={handleSearchSubmit} className="search-form">
+         {/* Input field for product search */}
+         <input 
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchQueryChange}
+          placeholder="Search by product name"
+          className="product-search-input"
+        />
         <select value={selectedCategory} onChange={handleCategoryChange} className="category-select">
           <option value="">All Categories</option>
           {categories.map(category => (

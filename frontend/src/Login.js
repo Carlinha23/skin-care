@@ -28,14 +28,17 @@ function Login() {
     <div className="login-container">
       <h1>Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
-        <label>Username</label>
+        {/* Updated label with htmlFor attribute and input with id attribute */}
+        <label htmlFor="username">Username</label>
         <input
+          id="username"
           type="text"
           value={username}
           onChange={e => setUsername(e.target.value)}
         />
-        <label>Password</label>
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}

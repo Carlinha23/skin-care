@@ -35,13 +35,15 @@
         ]
     },
     "devDependencies": {
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^10.4.9",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.14.0",
-        "enzyme-to-json": "^3.3.5"
+        "enzyme-to-json": "^3.3.5",
+        "supertest": "^7.0.0"
     },
     "engines": {
         "node": "16.x"
     }
+
 }
-
-
