@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
 const reviewRouter = require("./routes/review");
 const categoryRouter = require("./routes/category");
+const productRoutes = require("./routes/product");
 const morgan = require("morgan");
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/api/reviews", reviewRouter);  // Use /api prefix for the routers
 app.use("/api/categories", categoryRouter);  // Use /api prefix for the routers
+app.use("/api/products", productRoutes);
 
 app.use(function (req, res, next) {
   return next(new NotFoundError());

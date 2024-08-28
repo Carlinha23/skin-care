@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Home.css';
+
 const BASE_URL = process.env.REACT_APP_BASE_URL || "https://skin-care-backend.onrender.com";
 
 function Home() {
@@ -9,15 +10,13 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [reviews, setReviews] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [visibleReviews, setVisibleReviews] = useState(5); // Number of reviews to display initially
+  const [visibleProducts, setVisibleProducts] = useState(5); // Number of reviews to display initially
   const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const history = useHistory();
-  
+
   useEffect(() => {
     async function fetchReviews() {
       try {
         const res = await axios.get(`${BASE_URL}/api/reviews`);
-        console.log("Fetched reviews:", res.data.reviews); 
         setReviews(res.data.reviews);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -67,9 +66,11 @@ function Home() {
   };
 
   const handleAddReviewClick = () => {
-    history.push('/reviews'); 
+    // Make sure you have the proper import for history
+    window.location.href = '/reviews'; 
   };
 
+  // Create a list of unique product names based on the filtered reviews
   const filteredReviews = reviews
     .filter(review => {
       const matchesQuery = review.productname && review.productname.toLowerCase().includes(searchQuery.toLowerCase());
@@ -77,8 +78,17 @@ function Home() {
       return matchesQuery && matchesCategory;
     });
 
+  // Create a list of unique product names with their category names
+  const uniqueProducts = [...new Map(filteredReviews.map(review => [
+    review.productname,
+    {
+      productName: review.productname,
+      categoryName: categories.find(cat => cat.id === review.categoryid)?.name || 'Unknown'
+    }
+  ])).values()];
+
   const handleLoadMore = () => {
-    setVisibleReviews(prevVisibleReviews => prevVisibleReviews + 5); // Increase the number of reviews to show
+    setVisibleProducts(prevVisibleProducts => prevVisibleProducts + 5); // Increase the number of reviews to show
   };
 
   const handleScrollToTop = () => {
@@ -93,8 +103,8 @@ function Home() {
         </div>
       </div>
       <form onSubmit={handleSearchSubmit} className="search-form">
-         {/* Input field for product search */}
-         <input 
+        {/* Input field for product search */}
+        <input 
           type="text"
           value={searchQuery}
           onChange={handleSearchQueryChange}
@@ -111,47 +121,32 @@ function Home() {
         <button onClick={handleAddReviewClick} className="add-review-button">Add Review</button>
       </form>
       <div className="reviews-list">
-        {filteredReviews.length === 0 ? (
+        {uniqueProducts.length === 0 ? (
           <p className="no-reviews-message">
             It looks like there are no reviews for this category yet. Click the 'Add Review' button and be the first to share your thoughts!
           </p>
         ) : (
-          filteredReviews.slice(0, visibleReviews).map(review => (
-            <div key={review.id} className="review-item">
-              <Link to={`/reviews/${review.id}`} className="review-link"> {/* Add a link to the review details */}
-                <h3>{review.productname || 'No product name'}</h3>
+          uniqueProducts.slice(0, visibleProducts).map((product, index) => (
+            <div key={index} className="product-item">
+              <Link to={`/productdetails/${encodeURIComponent(product.productName)}`} className="product-link">
+                <h3>{product.productName}</h3>
               </Link>
-              <div className="review-details">
-
-
-              <span className="review-label">Brand:</span>
-              <span className="review-value">{review.brand}</span>
-              
-              <span className="review-label">Comment:</span>
-              <span className="review-value">{review.comment}</span>
-              
-              <span className="review-label">Date:</span>
-              <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
-            
-            {review.image && review.image.trim() !== '' && (
-              <img src={review.image} alt={review.productname || 'Image'} />
-            )}
-          </div>
-          </div>
+            </div>
           ))
         )}
-        {filteredReviews.length > visibleReviews && (
+        {uniqueProducts.length > visibleProducts && (
           <button onClick={handleLoadMore} className="load-more-button">Load More</button>
         )}
       </div>
       {showScrollToTop && (
         <button onClick={handleScrollToTop} className="scroll-to-top-button">↑</button>
       )}
-      </div>
+    </div>
   );
 }
 
 export default Home;
 
+          
 
 

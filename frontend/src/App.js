@@ -9,6 +9,7 @@ import NavBar from './Navigation';
 import Review from './Review';
 import Footer from './Footer';
 import ReviewDetails from './ReviewDetails';
+import ProductDetails from './ProductDetails';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/reviews" component={Review} />
             <Route path="/reviews/:id" component={ReviewDetails} /> 
+            <Route path="/productdetails/:productName" component={ProductDetails} />
             <Route exact path="/" component={Home} />
           </Switch>
           <Footer />

@@ -7,6 +7,7 @@ const { sqlForPartialUpdate } = require("../helpers/sql");
 /** Related functions for reviews. */
 
 
+
 class Review {
   static async create(data) {
     const date = new Date().toISOString();
@@ -39,7 +40,6 @@ class Review {
 
     return review;
   }
-
   
 
   /** Find all reviews (optional filter on searchFilters).
@@ -65,42 +65,49 @@ class Review {
                  FROM reviews`;
     let whereExpressions = [];
     let queryValues = [];
-
+  
     const { userId, categoryId, productName, brand } = searchFilters;
-
-    // For each possible search term, add to whereExpressions and queryValues so
-    // we can generate the right SQL
-
+  
     if (userId !== undefined) {
       queryValues.push(userId);
       whereExpressions.push(`username = $${queryValues.length}`);
     }
-
+  
     if (categoryId !== undefined) {
       queryValues.push(categoryId);
       whereExpressions.push(`categoryid = $${queryValues.length}`);
     }
-
-    if (productName !== undefined) {
-      queryValues.push(productName);
+  
+    if (productName) {
+      queryValues.push(`%${productName}%`);
       whereExpressions.push(`productname ILIKE $${queryValues.length}`);
     }
-
+  
     if (brand !== undefined) {
-      queryValues.push(brand);
+      queryValues.push(`%${brand}%`);
       whereExpressions.push(`brand ILIKE $${queryValues.length}`);
     }
-
+  
     if (whereExpressions.length > 0) {
       query += " WHERE " + whereExpressions.join(" AND ");
     }
-
-    // Finalize query and return results
-
-    query += " ORDER BY date";
+  
+    query += " ORDER BY date DESC";  // Sort reviews by date, most recent first
+  
+    console.log("Final Query:", query);
+    console.log("Query Values:", queryValues);
+  
     const reviewsRes = await db.query(query, queryValues);
     return reviewsRes.rows;
   }
+  
+
+    // Finalize query and return results
+
+    //query += " ORDER BY date";
+    //const reviewsRes = await db.query(query, queryValues);
+    //return reviewsRes.rows;
+  //}
 
   /** Given a review id, return data about review.
    *

@@ -4,6 +4,7 @@ const { ensureLoggedIn } = require("../middleware/auth");
 const Review = require("../models/review");
 const jsonschema = require("jsonschema");
 const reviewNewSchema = require("../schemas/reviewNew.json");
+const Product = require("./product");
 
 const reviewRouter = new express.Router();
 
@@ -32,11 +33,22 @@ reviewRouter.post("/", ensureLoggedIn, async function (req, res, next) {
 
 reviewRouter.get("/", async function (req, res, next) {
   try {
+    const { category, productname } = req.query;
     const searchFilters = {};
 
-    if (req.query.category) {
-      searchFilters.categoryId = req.query.category;
+    // Log incoming query parameters
+    console.log("Incoming Query Params:", req.query);
+
+    if (category) {
+      searchFilters.categoryId = category;
     }
+
+    if (productname) {
+      searchFilters.productName = productname;
+    }
+
+    // Log the constructed search filters
+    console.log("Search Filters:", searchFilters);
 
     const reviews = await Review.findAll(searchFilters);
     return res.json({ reviews });
@@ -54,6 +66,20 @@ reviewRouter.get("/:id", async function (req, res, next) {
   } catch (err) {
     // Log the error
     console.error(`Error in GET /reviews/${req.params.id}:`, err);
+    return next(err);
+  }
+});
+
+// New route to get all reviews by product name
+reviewRouter.get('/api/reviews/product/:productname', async (req, res, next) => {
+  try {
+    const { productname } = req.params;
+    const reviews = await Review.findAll({ where: { productname } });
+    if (reviews.length === 0) {
+      return res.status(404).json({ message: `No reviews found for product: ${productname}` });
+    }
+    return res.json({ reviews });
+  } catch (err) {
     return next(err);
   }
 });
