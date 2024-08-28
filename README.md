@@ -68,7 +68,8 @@ The application is deployed with Render.
 
 
 **Home Page**
-<img width="785" alt="home page" src="https://github.com/user-attachments/assets/6cae3dfb-2ef9-42b0-875e-40578f0f5216">
+<img width="937" alt="nem home page" src="https://github.com/user-attachments/assets/7870a869-d5db-4b11-af5d-55b122303adf">
+
 
 
 **Review Page before user login**
